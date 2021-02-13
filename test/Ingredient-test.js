@@ -1,7 +1,9 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const Ingredient = require('../src/Ingredient');
+if (typeof module !== 'undefined') {
+  Ingredient = require('../src/Ingredient');
+}
 
 describe('Ingredient', () => {
 
@@ -34,5 +36,4 @@ describe('Ingredient', () => {
   it('should have a unit of measurement', () => {
     expect(ingredient.unit).to.deep.equal('tablespoons');
   });
-
-})
+});

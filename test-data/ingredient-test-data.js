@@ -2,7 +2,7 @@ const ingredientsData = [
   {
     "id": 23,
     "name": "gumdrops",
-    "estimatedCostInCents": 42
+    "estimatedCostInCents": 42    
   },
   {
     "id": 27,

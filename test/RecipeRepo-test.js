@@ -1,9 +1,11 @@
 const chai = require('chai');
 const expect = chai.expect;
-// write test: it needs to have a User!!
-const RecipeRepo = require('../src/RecipeRepo');
-const Recipe = require('../src/Recipe');
-const User = require('../src/User');
+
+if (typeof module !== 'undefined') {
+  Recipe = require('../src/Recipe');
+  User = require('../src/User');
+  RecipeRepo = require('../src/RecipeRepo');
+}
 
 const recipeTestData = require('../test-data/recipe-test-data');
 const usersTestData = require('../test-data/user-test-data');
@@ -67,8 +69,7 @@ describe('RecipeRepo', () => {
     it('should filter recipes by name', () => {
 
       recipeRepo.matchName(name);
-      expect(recipeRepo.recipes[0].name).to.deep.equal(recipeData[1].name);
+      expect(recipeRepo.recipes[0].name).to.deep.equal(recipeData[0].name);
     });
   });
-
 });

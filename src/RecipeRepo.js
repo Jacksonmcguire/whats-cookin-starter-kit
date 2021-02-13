@@ -13,22 +13,24 @@ class RecipeRepo {
       return acc;
     }, []);
   }
-    
-    
+
+
   matchIngredient(ingredientId) {
     return this.recipes.filter(recipe => {
       return recipe.ingredients.find(ingredient => {
-        console.log(ingredient.id === ingredientId);
+        //console.log(ingredient.id === ingredientId);
         return ingredient.id === ingredientId
       });
     })
   }
-      
+
   matchName(name) {
     return this.recipes.filter(recipe => recipe.name.includes(name));
   }
 }
-    
 
-// module.exports = RecipeRepo;
+
+if (typeof module !== 'undefined') {
+  module.exports = RecipeRepo;
+}
 //userData.sort((a, b) => 0.5 - Math.random())[0];
