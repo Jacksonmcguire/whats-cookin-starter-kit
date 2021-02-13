@@ -1,7 +1,7 @@
 const usersData = {
   "name": "Bosphorous Immanuel",
   "id": 42,
-  "pantry": [{"ingredient": 61, "amount": 6}, {"ingredient": 62, "amount": 6}]
+  "pantry": [{"ingredient": 'gumdrops', "amount": 66}, {"ingredient": 'barbarol', "amount": 77}]
 };
 
 

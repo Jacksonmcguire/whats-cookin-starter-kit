@@ -39,7 +39,7 @@ describe ('User', () => {
 
   it('should have a pantry', () => {
 
-    expect(recipeRepo.user.pantry).to.deep.equal(userData.pantry);
+    expect(recipeRepo.user.pantry.pantryData).to.deep.equal(userData.pantry);
   });
 
   it('should have favorite recipes', () => {

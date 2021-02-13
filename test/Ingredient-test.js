@@ -9,7 +9,6 @@ describe('Ingredient', () => {
 
 
   beforeEach('create a recipe repository', () => {
-    //recipeRepo = new RecipeRepo(recipeData, userData);
     ingredient = new Ingredient({"id": 9999,
       "quantity": {"amount": 2, "unit": "tablespoons"}});
   });

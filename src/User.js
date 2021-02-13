@@ -1,12 +1,14 @@
+const Pantry = require('./Pantry');
+
 class User {
   constructor(userData, ingredientsData) {
     this.user = userData;
     this.name = userData.name;
     this.id = userData.id;
-    this.pantry = userData.pantry;
+    this.pantry = new Pantry(userData.pantry);
     this.favorites = [];
     this.planned = [];
-    this.ingredientsData = ingredientsData
+    this.ingredientsData = ingredientsData;
   }
   addFavorite(recipe) {
     this.favorites.push(recipe);

@@ -5500,8 +5500,8 @@ let usersData = [
       }
     ]
   },
-  {
-    "name": "Jaydon Rosenbaum",
+    {
+      "name": "Jaydon Rosenbaum",
     "id": 36,
     "pantry": [
       {
