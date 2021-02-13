@@ -58,15 +58,30 @@ describe ('Recipe', () => {
   describe('Inquiries', () => {
 
     it('should determine names of needed ingredients', () => {
-      const ingredientsNeeded = recipeNumberOne.getIngredientsByName();
+      const ingredientsNeeded = recipeNumberOne.getIngredients();
 
-      expect(ingredientsNeeded).to.deep.equal(['gumdrops', 'barbarol'])
+      expect(ingredientsNeeded).to.deep.equal([
+        {
+          id: 23,
+          quantity: { amount: 42, unit: 'octoban' },
+          amount: 42,
+          unit: 'octoban',
+          nameObj: { id: 23, name: 'gumdrops', estimatedCostInCents: 42 }
+        },
+        {
+          id: 27,
+          quantity: { amount: 28, unit: 'oz' },
+          amount: 28,
+          unit: 'oz',
+          nameObj: { id: 27, name: 'barbarol', estimatedCostInCents: 582 }
+        }
+      ])
     });
 
     it('should get the total cost of the ingredients', () => {
       const cost = recipeNumberOne.getCost();
 
-      expect(cost).to.deep.equal(180.6)
+      expect(cost).to.deep.equal('180.60')
     });
 
     it('should return instructions', () => {
