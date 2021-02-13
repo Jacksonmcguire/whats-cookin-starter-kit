@@ -23,10 +23,11 @@ button:focus {
 
 /* MAIN */
 main {
-  height: 40%;
+  height: 50%;
   display: flex;  
   justify-content: space-between;
   align-items: flex-end;
+  background-size: contain;
 }
 
 .sidebar {
@@ -38,33 +39,41 @@ main {
   bottom: 0;
   transform: rotate(-90deg);
   text-align: center;
-  color: #FC913A;
+  color: #4eac17b2;
   border-bottom: solid;
   font-size: 2em;
   font-weight: bold;
 }
 
 /* USER BUTTONS */
-.buttonContainer {
+.button-container {
   display: flex;
   align-items: flex-start;
   width: 45%;
-  align-self: flex-start;
+  align-self: flex-end;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+  border-radius: .5%;
+  margin-left: -2%;
+  margin-bottom: 7%;
+  transform: rotate(270deg);
 }
 
-.buttonContainer > button {
-  border: 1px solid #FC913A;
-  border-radius: 10%;
+.button-container > button {
+  border: none;
   background-color: inherit;
-  padding: 10px;
-  color: #FC913A;
-  margin: 5%;
+  padding: 1%;
+  color: #4eac17b2;
+  margin: 7%;
   text-align: center;
+  height: 10%;
 }
 
-.buttonContainer > button:hover, 
+.button-container > button:hover, 
 .my-list-btn:hover {
-  background-color: #ffd971cc;
+  background-color
 }
 /* SEARCH CONTAINER */
 .search-container {
@@ -78,8 +87,8 @@ main {
   border-top: 0;
   border-right: 0;
   border-left: 0;
-  border-color:#FC913A;
-  color: #FC913A;
+  border-color:#4eac17b2;
+  color: #4eac17b2;
   font-size: 20px;
   margin: 2%;
 }
@@ -89,26 +98,73 @@ main {
 .current-recipe-container {
   display: flex;
   align-self: center;
+  flex-flow: row;
   width: 100%;
+  height: 100%;
+  background-size: cover;
+  align-items: flex-start; 
+  border-radius: 10%;
+  border: 1px solid inherit;
 }
 
 .current-recipe {
   display: flex;
-  flex: 2;
-  flex-flow: row wrap;
-  background-color: #FAE6B1;
-  border-radius: 5%;
+  box-shadow: 0px 0px 2px 2px #4eac17b2;
+  background-color: #F0F0E1;
   width: 100%;
-  height: auto;
+  height: 100%;
+  color: #4eac17b2;
+  font-weight: bold;
 }
 
-.current-recipe-img {
-  height: 35%;
-  width: 35%;
+.current-recipe-title {
+  color: #000000;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-blend-mode: normal;
   border-radius: 5%;
 }
+
+.current-recipe-instructions {
+  display: flex; 
+  flex-flow: column; 
+  margin: 0px 0px -5% 0px;
+  padding: 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-self: start;
+  font-size: 1em;
+  height: 100%;
+  width: 80%;
+  overflow-y: scroll;
+  /* overflow-x: hidden; */
+}
+
+.current-recipe-ingredients {
+  word-spacing: 5px;
+  line-height: 150%;
+  width: 40%;
+  overflow-y: scroll;
+  overflow-x:hidden;
+}
+
+
+.cook-btn {
+  color: #4eac17b2;
+  border: none;
+  border-radius: 20px;
+  align-self: flex-end;
+  margin: 0 0 3% 3%;
+}
+
 
 /* INTERACTIVE-AREA */
+
+.interactive-area {
+  display: flex;
+  height: 45%;
+}
 
 .my-list-container {
   text-align: center;
@@ -116,12 +172,11 @@ main {
 }
 
 .my-list-btn {
-  background-color: #FAE6B1;
-  border: 0;
+  border: 1px solid #4eac17b2;
   height: 50%;
   width: 35%;
   border-radius: 10px;
-  color: #FC913A;
+  color: #4eac17b2;
 }
 
 /* RADIO FORM */
@@ -141,17 +196,17 @@ input[type="radio"] {
 
 .tag-container > label {
   cursor: pointer;
-  border: 1px solid #FC913A;
+  border: 1px solid #4eac17b2;
   border-radius: 10px;
   padding: 1%;
-  margin: 0px 2px 10px 2px;
-  color: #FC913A;
+  margin: 1%;
+  color: #4eac17b2;
   height: 20px;
 }
 
-.tag-container > label:hover, 
-.tag-container > input:checked + label {
-  background-color: #FAE6B1;  
+.tag-label-checked, 
+.tag-container > label:hover {
+  background-color: #ccfab1;  
   font-size: 1.001em;
 }
 
@@ -161,97 +216,157 @@ input[type="radio"] {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: 20%;
 }
 
 .recipe-card {
   display: flex;
   flex: 1;
   flex-direction: row;
-  margin-left: .25%;
+  width: 70%;
+  margin: 2%;
+  height: 100%;
 } 
 /* UNFEATURED RECIPE */
+
 .recipe {
   display: flex;
   flex-direction: column;
-  background-color: #FAE6B1;
+  background-color: #F0F0E1;
   background-size: cover;
-  height: 50%;
-  width: 80%;
-  border-radius: 10%;
-  padding-bottom: 0%;
+  box-shadow: 0px 0px 2px 2px #0b0eacab;
+  border-radius: 2%;
+  margin-bottom: -20%;
+  opacity: .8;
+  width: 21vh;
+  margin: 5%;
+  transition: transform 500ms;
 }
 
 .recipe-img {
-  height: 125px;
-  width: 125px;
-  border-radius: 50%;
-  margin-left: -30%;
+  height: 15vh;
+  width: 15vh;
+  border-radius: 35%;
+  margin-right: -25%;
   opacity: 0.85;
-  align-self: center;
+  align-self: flex-end;
+  transition: transform 500ms;
+
 }
 
-/* Recipe When hovered */
+/* RECIPE WHEN HOVERED */
 
-.recipe-card:hover .recipe {
-  background-color: #fcef3aa2;
+.recipe-card:hover .recipe,
+.recipe-card:hover .recipe-img {
+  opacity: 1;
+  transform: scale(1.25);
+  animation-duration: .5s;
+}
+
+.recipe-card:hover ~ .recipe {
+  transform: translateX(25%);
 }
 
 
 .recipe-card:hover .recipe-img {
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  margin-left: -35%;
-}
-/* RECIPE BUTTONS */
-.favorite-label {
-  align-self: flex-end;
-  height: 30px;
-  width: 30px;
-  background-image: url("https://image.flaticon.com/icons/png/512/109/109697.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.favorite-label:hover {
-  background-color: #FC913A;
-  border-radius: 50%;
-  height: 31px;
-  width: 31px;
-}
-.recipe-card:hover .favorite-label, 
-.recipe-card:hover .cook-btn {
-  visibility: visible;
-  display: initial;
-}
-
-#favoriteInput {
-  border: 0px;
-}
-
-.cook-btn {
-  background-color: #FAE6B1;
-  color: #FC913A;
-  border: none;
-  border-radius: 20px;
-  text-align: center;
-  align-self: flex-end;
-  margin: 5%;
+  height: 20vh;
+  width: 20vh;
+  border-radius: 35%;
+  transform: translateX(-15%);
 }
 
 /* RECIPE INFO */
 
 .recipe-title {
   font-size: 1.25em;
-  margin: 15px 0px 0px 10px;
-  color: #FC913A;
+  margin: 10% 2% 0px 5%;
+  color: inherit;
+  width: 75%;
 }
 
 .recipe-ingredients {
   margin: 5% 5px 10px 10px;
-  color: #FC913A;
+  color: inherit;
 }
 
+/* RECIPE BUTTONS */
+.favorite-label {
+  align-self: flex-end;
+  margin-bottom: -30%;
+  height: 30px;
+  width: 30px;
+  background-image: url("https://image.flaticon.com/icons/png/512/109/109697.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer
+}
+
+.favorite-label:hover {
+  border-radius: 50%;
+  height: 31px;
+  width: 31px;
+  background-color: #F0F0E1;
+}
+.recipe-card:hover .favorite-label {
+  visibility: visible;
+}
+
+#favoriteInput {
+  border: 0px;
+}
+
+
+/* CHANGE PAGE ARROWS */
+
+.arrow {
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  color: #4eac17b2;
+  margin-top: -31px;
+  position: absolute;
+}
+  
+.right {
+  border-bottom: 3px solid;
+  border-left: 3px solid;
+  transform: rotate(-135deg);
+  right: 3%;
+}
+
+.left {
+  border-bottom: 3px solid;
+  border-left: 3px solid;
+  transform: rotate(45deg);
+  left: 15%;
+}
+
+/* RECIPE CARD COLORS */
+
+.cyan-card {
+  background-color: #B5DDD1;
+  box-shadow: 0px 0px 2px 2px #B5DDD1;
+}
+
+.green-card {
+  background-color: #D7E7A9;
+  box-shadow: 0px 0px 2px 2px #D7E7A9;
+}
+
+.blue-card {
+  background-color: #D3C0F9;
+  box-shadow: 0px 0px 2px 2px #D3C0F9;
+}
+
+.orange-card {
+  background-color: #F99A9C;
+  box-shadow: 0px 0px 2px 2px #F99A9C;
+}
+
+.pink-card {
+  background-color: #FDBCCF;
+  box-shadow: 0px 0px 2px 2px #FDBCCF;
+}
 /* HIDDEN */
 .hidden {
   display: none;
@@ -259,9 +374,4 @@ input[type="radio"] {
 
 .vis-hidden {
   visibility: hidden;
-}
-
-.interactive-area {
-  display: flex;
-  height: 45%;
 }
