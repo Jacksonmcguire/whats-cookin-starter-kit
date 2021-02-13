@@ -66,7 +66,7 @@ describe ('Recipe', () => {
     it('should get the total cost of the ingredients', () => {
       const cost = recipeNumberOne.getCost();
 
-      expect(cost).to.deep.equal(139.86)
+      expect(cost).to.deep.equal(180.6)
     });
 
     it('should return instructions', () => {

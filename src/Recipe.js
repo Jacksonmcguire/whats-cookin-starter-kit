@@ -8,7 +8,16 @@ class Recipe {
     this.instructions = recipe.instructions;
     this.name = recipe.name;
     this.tags = recipe.tags;
-    this.ingredientsData = ingredientsData;
+    this.ingredientsData = ingredientsData.filter(ingredient => {
+      const recipeIngredient = recipe.ingredients.find(recipeIngredient => {
+        //console.log(recipeIngredient.id);
+        //console.log(ingredient.id);
+        return recipeIngredient.id === ingredient.id
+      });
+      // if (recipeIngredient) {}.id;//data id matches per recipe ings id
+      return ingredient.id === (recipeIngredient || []).id;
+    });
+    //console.log(this.ingredientsData);
 
   }
 
