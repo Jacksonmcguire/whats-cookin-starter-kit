@@ -49,16 +49,15 @@ main {
 .button-container {
   display: flex;
   align-items: flex-start;
-  width: 45%;
-  align-self: flex-end;
+  width: 40%;
+  align-self: flex-start;
   height: 100%;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: bottom;
   border-radius: .5%;
-  margin-left: -2%;
-  margin-bottom: 7%;
-  transform: rotate(270deg);
+  flex-flow: column;
+  margin-left: 2%;
 }
 
 .button-container > button {
@@ -69,12 +68,9 @@ main {
   margin: 7%;
   text-align: center;
   height: 10%;
+  font-size: 2.5vh
 }
 
-.button-container > button:hover, 
-.my-list-btn:hover {
-  background-color
-}
 /* SEARCH CONTAINER */
 .search-container {
   display: flex;
@@ -89,7 +85,7 @@ main {
   border-left: 0;
   border-color:#4eac17b2;
   color: #4eac17b2;
-  font-size: 20px;
+  font-size: 2.5vh;
   margin: 2%;
 }
 
@@ -105,6 +101,8 @@ main {
   align-items: flex-start; 
   border-radius: 10%;
   border: 1px solid inherit;
+  margin-right: 2%;
+  margin: 0 2% 0 1.5%;
 }
 
 .current-recipe {
@@ -138,7 +136,6 @@ main {
   height: 100%;
   width: 80%;
   overflow-y: scroll;
-  /* overflow-x: hidden; */
 }
 
 .current-recipe-ingredients {
@@ -154,8 +151,7 @@ main {
   color: #4eac17b2;
   border: none;
   border-radius: 20px;
-  align-self: flex-end;
-  margin: 0 0 3% 3%;
+  margin: 50% 0 3% 3%;
 }
 
 
@@ -167,27 +163,31 @@ main {
 }
 
 .my-list-container {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 10%;
   height: 10%;
+  margin: 1%;
+  padding: 1%;
 }
 
 .my-list-btn {
-  border: 1px solid #4eac17b2;
-  height: 50%;
-  width: 35%;
-  border-radius: 10px;
+  border: none;
+  background-color: #F0F0E1;
   color: #4eac17b2;
 }
 
 /* RADIO FORM */
 .tag-container {
+  align-self: flex-start;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-flow: column wrap;
   height: 100%;
-  width: 50%;
+  width: 100%;
   border-radius: 20px;
-  margin: 0px 2% 0px 3%;
+  margin: 0px 5% 10% 10%;
 }
 
 input[type="radio"] {
@@ -198,16 +198,17 @@ input[type="radio"] {
   cursor: pointer;
   border: 1px solid #4eac17b2;
   border-radius: 10px;
-  padding: 1%;
-  margin: 1%;
+  padding: .5vh;
+  margin: 3%;
   color: #4eac17b2;
-  height: 20px;
+  font-size: 2.5vh;
+  /* height: 3vh; */
 }
 
 .tag-label-checked, 
 .tag-container > label:hover {
   background-color: #ccfab1;  
-  font-size: 1.001em;
+  font-size: 2.51vh;
 }
 
 /* Recipe */
@@ -278,8 +279,8 @@ input[type="radio"] {
 /* RECIPE INFO */
 
 .recipe-title {
-  font-size: 1.25em;
-  margin: 10% 2% 0px 5%;
+  font-size: 2.5vh;
+  margin: 15% 2% 0px 5%;
   color: inherit;
   width: 75%;
 }
@@ -292,7 +293,7 @@ input[type="radio"] {
 /* RECIPE BUTTONS */
 .favorite-label {
   align-self: flex-end;
-  margin-bottom: -30%;
+  margin-bottom: -40%;
   height: 30px;
   width: 30px;
   background-image: url("https://image.flaticon.com/icons/png/512/109/109697.png");
@@ -301,11 +302,12 @@ input[type="radio"] {
   cursor: pointer
 }
 
-.favorite-label:hover {
+.favorite-label:hover,
+.fav-checked {
   border-radius: 50%;
   height: 31px;
   width: 31px;
-  background-color: #F0F0E1;
+  background-color: #fcff64;
 }
 .recipe-card:hover .favorite-label {
   visibility: visible;

@@ -18,26 +18,22 @@ class User {
     }
   }
   getFavoritesByTags(tags) {
-    let filteredFavorites = this.favorites.filter(recipe => {
-      return tags.filter(tag => {
-        return recipe.tags.includes(tag);
-      });
-    });
-    return filteredFavorites;
+    return tags.reduce((acc, tag) => {
+      acc.push(...(this.favorites.filter(recipe => recipe.tags.includes(tag))));
+      return acc;
+    }, []);
   }
 
   getFavoritesByName(recipeName) {
-    return this.favorites.filter(recipe => recipe.name === recipeName);
+    return this.favorites.filter(recipe => recipe.name.includes(recipeName));
   }
 
-  getFavoritesByIngredient(searchIngredientName) {
-    const ingredientId = this.ingredientsData.find(ingredient => {
-      return ingredient.name === searchIngredientName
-    }).id;
-    const filteredFavorites = this.favorites.filter(recipe => {
-      return recipe.ingredients.find(({id}) => id === ingredientId);
-    });
-    return filteredFavorites;
+  getFavoritesByIngredient(ingredientId) {
+    return this.favorites.filter(favorite => {
+      return favorite.ingredients.find(ingredient => {
+        return ingredient.id === ingredientId
+      });
+    })
   }
 
   addPlanned(recipe) {
@@ -45,4 +41,6 @@ class User {
   }
 }
 
-module.exports = User;
+if (typeof module !== undefined) {
+  module.exports = User;
+}
