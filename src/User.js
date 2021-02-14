@@ -32,14 +32,12 @@ class User {
     return this.favorites.filter(recipe => recipe.name === recipeName);
   }
 
-  getFavoritesByIngredient(searchIngredientName) {
-    const ingredientId = this.ingredientsData.find(ingredient => {
-      return ingredient.name === searchIngredientName
-    }).id;
-    const filteredFavorites = this.favorites.filter(recipe => {
-      return recipe.ingredients.find(({id}) => id === ingredientId);
-    });
-    return filteredFavorites;
+  getFavoritesByIngredient(ingredientId) {
+    return this.favorites.filter(favorite => {
+      return favorite.ingredients.find(ingredient => {
+        return ingredient.id === ingredientId
+      });
+    })
   }
 
   addPlanned(recipe) {
