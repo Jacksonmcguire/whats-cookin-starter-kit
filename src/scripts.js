@@ -1,12 +1,13 @@
 
 const currentRecipeContainer = document.querySelector('.current-recipe-container');
 const currentRecipeIngredients = currentRecipeContainer.querySelector('.current-recipe-ingredients');
-const currentRecipeInstructions = currentRecipeContainer.querySelector('.current-recipe-instructions')
-const currentRecipeTitle = currentRecipeContainer.querySelector('.current-recipe-title')
+const currentRecipeInstructions = currentRecipeContainer.querySelector('.current-recipe-instructions');
+const currentRecipeTitle = currentRecipeContainer.querySelector('.current-recipe-title');
 const recipeList = document.querySelector('.recipe-list');
 const tagContainer = document.querySelector('.tag-container');
 const buttonContainer = document.querySelector('.button-container');
 const searchForm = document.querySelector('.search-container');
+const myListBtn = currentRecipeContainer.querySelector('.my-list-btn');
 const goHomeBtn = buttonContainer.querySelector('#goHomeBtn');
 const showFavBtn = buttonContainer.querySelector('#showFavBtn');
 const favBtns = recipeList.querySelectorAll('.favorite-input');
@@ -26,6 +27,7 @@ tagContainer.addEventListener('click', clickTagFilter);
 searchForm.addEventListener('submit', submitSearch);
 goHomeBtn.addEventListener('click', goHome);
 showFavBtn.addEventListener('click', showFavorites);
+myListBtn.addEventListener('click', addToMyList);
 
 
 
@@ -37,6 +39,14 @@ function openPage() {
 function goHome() {
   generateRecipeCards(recipeRepo.recipes, 0);
   prevPageArrow.classList.add('hidden');
+  tagContainer.classList.remove('vis-hidden');
+  currentRecipeContainer.classList.add('vis-hidden');
+}
+
+function addToMyList() {
+  const currentTitle = currentRecipeTitle.innerText
+  const featuredRecipe = currentRecipes.find(recipe => recipe.name === currentTitle);
+  recipeRepo.user.addPlanned(featuredRecipe);
 }
 
 function randomizeCardColor(recipeCard) {
@@ -81,22 +91,42 @@ function showFavorites() {
 function submitSearch(e) {
   e.preventDefault();
   const searchValue = searchForm.querySelector('.search-field').value;
-  const matchedName = recipeRepo.recipes.find(recipe => recipe.name.includes(searchValue))
+  if (recipeRepo.user.favorites.includes(...currentRecipes)) {
+    searchFavorites(searchValue);
+  } else {
+    const matchedName = recipeRepo.recipes.find(recipe => recipe.name.includes(searchValue))
+    let ifFound = false;
+    recipeRepo.recipes.forEach(recipe => {
+      const currentIngredients = recipe.getIngredients();
+      const found = currentIngredients.find(currentIngredient => currentIngredient.nameObj.name.includes(searchValue));
+      if (found) {
+        ifFound = found.id;
+      }
+    })
+    if (matchedName) {
+      generateRecipeCards(recipeRepo.matchName(searchValue), 0);
+    } else if (ifFound !== 0) {
+      console.log(recipeRepo.matchIngredient(ifFound))
+      generateRecipeCards(recipeRepo.matchIngredient(ifFound), 0);
+    }  
+  }
+}
+
+function searchFavorites(searchValue) {
+  const matchedName = recipeRepo.user.favorites.find(recipe => recipe.name.includes(searchValue));
   let ifFound = false;
-  recipeRepo.recipes.forEach(recipe => {
-    const currentIngredients = recipe.getIngredients();
+  recipeRepo.user.favorites.forEach(favorite => {
+    const currentIngredients = favorite.getIngredients();
     const found = currentIngredients.find(currentIngredient => currentIngredient.nameObj.name.includes(searchValue));
     if (found) {
       ifFound = found.id;
     }
   })
   if (matchedName) {
-    console.log('hello')
-    generateRecipeCards(recipeRepo.matchName(searchValue), 0);
+    generateRecipeCards(recipeRepo.user.getFavoritesByName(searchValue), 0);
   } else if (ifFound !== 0) {
-    console.log(recipeRepo.matchIngredient(ifFound))
-    generateRecipeCards(recipeRepo.matchIngredient(ifFound), 0);
-  }  
+    generateRecipeCards(recipeRepo.user.getFavoritesByIngredient(ifFound), 0);
+  }
 }
 
 function favoriteRecipe() {
@@ -208,7 +238,6 @@ function generateLimitedCards(recipeArr) {
     }
   })
 }
-
 
 function showNextPage() {
   tagContainer.classList.add('vis-hidden');
