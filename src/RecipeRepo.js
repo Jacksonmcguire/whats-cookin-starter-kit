@@ -1,5 +1,7 @@
-// const Recipe = require('./Recipe');
-// const User = require('./User');
+// if (typeof module !== undefined) {
+//   Recipe = require('./Recipe');
+//   User = require('./User');
+// }
 
 class RecipeRepo {
   constructor(recipeData, userData, ingredientsData) {
