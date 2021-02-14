@@ -71,10 +71,6 @@ main {
   font-size: 2.5vh
 }
 
-.button-container > button:hover, 
-.my-list-btn:hover {
-  background-color
-}
 /* SEARCH CONTAINER */
 .search-container {
   display: flex;
@@ -156,8 +152,7 @@ main {
   color: #4eac17b2;
   border: none;
   border-radius: 20px;
-  align-self: flex-end;
-  margin: 0 0 3% 3%;
+  margin: 50% 0 3% 3%;
 }
 
 
@@ -169,15 +164,18 @@ main {
 }
 
 .my-list-container {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 10%;
   height: 10%;
+  margin: 1%;
+  padding: 1%;
 }
 
 .my-list-btn {
-  border: 1px solid #4eac17b2;
-  height: 50%;
-  width: 35%;
-  border-radius: 10px;
+  border: none;
+  background-color: #F0F0E1;
   color: #4eac17b2;
 }
 
