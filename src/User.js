@@ -29,7 +29,7 @@ class User {
   }
 
   getFavoritesByName(recipeName) {
-    return this.favorites.filter(recipe => recipe.name === recipeName);
+    return this.favorites.filter(recipe => recipe.name.includes(recipeName));
   }
 
   getFavoritesByIngredient(ingredientId) {
