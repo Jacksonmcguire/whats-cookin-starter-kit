@@ -7,6 +7,9 @@ const recipeList = document.querySelector('.recipe-list');
 const tagContainer = document.querySelector('.tag-container');
 const buttonContainer = document.querySelector('.button-container');
 const searchForm = document.querySelector('.search-container');
+const goHomeBtn = buttonContainer.querySelector('#goHomeBtn');
+const showFavBtn = buttonContainer.querySelector('#showFavBtn');
+const favBtns = recipeList.querySelectorAll('.favorite-input');
 const nextPageArrow = recipeList.querySelector('.right');
 const prevPageArrow = recipeList.querySelector('.left');
 const recipeRepo = new RecipeRepo(recipeData, usersData, ingredientsData);
@@ -21,10 +24,19 @@ nextPageArrow.addEventListener('click', showNextPage);
 prevPageArrow.addEventListener('click', showPrevPage);
 tagContainer.addEventListener('click', clickTagFilter);
 searchForm.addEventListener('submit', submitSearch);
+goHomeBtn.addEventListener('click', goHome);
+showFavBtn.addEventListener('click', showFavorites);
+
 
 
 function openPage() {
   generateRecipeCards(currentRecipes, 0);
+  favBtns.forEach(favBtn => favBtn.addEventListener('click', favoriteRecipe));
+}
+
+function goHome() {
+  generateRecipeCards(recipeRepo.recipes, 0);
+  prevPageArrow.classList.add('hidden');
 }
 
 function randomizeCardColor(recipeCard) {
@@ -34,8 +46,15 @@ function randomizeCardColor(recipeCard) {
 }
 
 function applyTags() {
-  const tags = recipeRepo.matchTags(currentFilters);
-  const uniqueTags = tags.filter((tag, index) => tags.indexOf(tag) === index);
+  let uniqueTags = [];
+  if (recipeRepo.user.favorites.includes(...currentRecipes)) {
+    const tags = recipeRepo.user.getFavoritesByTags(currentFilters);
+    uniqueTags = tags.filter((tag, index) => tags.indexOf(tag) === index);
+    console.log(uniqueTags);
+  } else {
+    const tags = recipeRepo.matchTags(currentFilters);
+    uniqueTags = tags.filter((tag, index) => tags.indexOf(tag) === index);
+  }
   generateRecipeCards(uniqueTags, 0);
 }
 
@@ -55,24 +74,19 @@ function removeFeaturedRecipe() {
   currentRecipeInstructions.innerHTML = '';
 }
 
+function showFavorites() {
+  generateRecipeCards(recipeRepo.user.favorites, 0);
+}
+
 function submitSearch(e) {
   e.preventDefault();
   const searchValue = searchForm.querySelector('.search-field').value;
-  console.log(searchValue)
-  // Goal: take this submitted search value
-  // Input: string
-  // Output: new list of recipes
-  // Steps:
-  // if recipe repo.recipes.find
-  // For each recipe get ingredients and then check the name
-  // console.log(matchedName)
   const matchedName = recipeRepo.recipes.find(recipe => recipe.name.includes(searchValue))
-  let ifFound = 0;
+  let ifFound = false;
   recipeRepo.recipes.forEach(recipe => {
     const currentIngredients = recipe.getIngredients();
     const found = currentIngredients.find(currentIngredient => currentIngredient.nameObj.name.includes(searchValue));
     if (found) {
-      // console.log(found)
       ifFound = found.id;
     }
   })
@@ -82,9 +96,31 @@ function submitSearch(e) {
   } else if (ifFound !== 0) {
     console.log(recipeRepo.matchIngredient(ifFound))
     generateRecipeCards(recipeRepo.matchIngredient(ifFound), 0);
-  }
-  
+  }  
 }
+
+function favoriteRecipe() {
+  const favBtnIndex = (this.id.slice(-1) - 1);
+  const favoritedTitle = 
+  recipeCards[favBtnIndex].querySelector('.recipe-title').innerText;
+  const favoritedRecipe = currentRecipes.find(recipe => recipe.name === favoritedTitle);
+  if (recipeRepo.user.favorites.includes(favoritedRecipe)) {
+    favBtns[favBtnIndex].labels[0].classList.remove('fav-checked');
+    recipeRepo.user.removeFavorite(favoritedRecipe);
+  } else {
+    favBtns[favBtnIndex].labels[0].classList.add('fav-checked');
+    recipeRepo.user.addFavorite(favoritedRecipe);
+  }
+}
+
+function determineFavorite(recipe) {
+  if (recipeRepo.user.favorites.includes(recipe)) {
+    return true
+  } else {
+    return false
+  }
+}
+
 
 function clickRecipeCard(e) {
   const currentRecipeCard = e.target.closest('.recipe-card');
@@ -125,7 +161,6 @@ function showFeaturedInfo(featuredRecipe) {
 
 
 function generateRecipeCards(newRecipes, iterationCounter) {  
-  console.log(newRecipes)
   currentRecipes = newRecipes;
   let iterationCount = iterationCounter;
   if (currentRecipes.length - iterationCount <= recipeCards.length) {
@@ -148,6 +183,11 @@ function createCardContents (cardLi, recipe, booleanDecision = false) {
     randomizeCardColor(cardLi.querySelector('.recipe'));
     cardLi.querySelector('.recipe-cost').innerText = `$${recipe.getCost()}`;
     cardLi.classList.remove('vis-hidden');
+    if (determineFavorite(recipe)) {
+      cardLi.querySelector('.favorite-label').classList.add('fav-checked');
+    } else {
+      cardLi.querySelector('.favorite-label').classList.remove('fav-checked');
+    }
     if (booleanDecision) {
       nextPageArrow.classList.remove('vis-hidden');
     }
@@ -155,10 +195,10 @@ function createCardContents (cardLi, recipe, booleanDecision = false) {
 }
 
 function generateLimitedCards(recipeArr) {
-  const recipeCards = recipeList.querySelectorAll('.recipe-card');
   recipeArr.forEach(recipe => {
     let currentRecipeCard = recipeCards[recipeArr.indexOf(recipe)];
     createCardContents(currentRecipeCard, recipe, true);
+    determineFavorite(currentRecipeCard, recipe.name);
   })
   let cardNumber = recipeArr.length;
   recipeCards.forEach(recipeCard => {
