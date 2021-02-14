@@ -1,16 +1,22 @@
 
 const currentRecipeContainer = document.querySelector('.current-recipe-container');
 const currentRecipeIngredients = currentRecipeContainer.querySelector('.current-recipe-ingredients');
-const currentRecipeInstructions = currentRecipeContainer.querySelector('.current-recipe-instructions')
-const currentRecipeTitle = currentRecipeContainer.querySelector('.current-recipe-title')
+const currentRecipeInstructions = currentRecipeContainer.querySelector('.current-recipe-instructions');
+const currentRecipeTitle = currentRecipeContainer.querySelector('.current-recipe-title');
 const recipeList = document.querySelector('.recipe-list');
 const tagContainer = document.querySelector('.tag-container');
 const buttonContainer = document.querySelector('.button-container');
 const searchForm = document.querySelector('.search-container');
+const myListBtn = currentRecipeContainer.querySelector('.my-list-btn');
+const goHomeBtn = buttonContainer.querySelector('#goHomeBtn');
+const showFavBtn = buttonContainer.querySelector('#showFavBtn');
+const showPlannedBtn = buttonContainer.querySelector('#myPlannedBtn');
+const favBtns = recipeList.querySelectorAll('.favorite-input');
 const nextPageArrow = recipeList.querySelector('.right');
 const prevPageArrow = recipeList.querySelector('.left');
 const recipeRepo = new RecipeRepo(recipeData, usersData, ingredientsData);
 const recipeCards = recipeList.querySelectorAll('.recipe-card');
+let showingFavorites = false;
 let currentFilters = [];
 let currentRecipes = recipeRepo.recipes;
 
@@ -21,10 +27,39 @@ nextPageArrow.addEventListener('click', showNextPage);
 prevPageArrow.addEventListener('click', showPrevPage);
 tagContainer.addEventListener('click', clickTagFilter);
 searchForm.addEventListener('submit', submitSearch);
+goHomeBtn.addEventListener('click', goHome);
+showFavBtn.addEventListener('click', showFavorites);
+myListBtn.addEventListener('click', addToMyList);
+showPlannedBtn.addEventListener('click', showPlannedRecipes);
+
 
 
 function openPage() {
   generateRecipeCards(currentRecipes, 0);
+  favBtns.forEach(favBtn => favBtn.addEventListener('click', favoriteRecipe));
+}
+
+function goHome() {
+  generateRecipeCards(recipeRepo.recipes, 0);
+  prevPageArrow.classList.add('hidden');
+  tagContainer.classList.remove('vis-hidden');
+  currentRecipeContainer.classList.add('vis-hidden');
+  showingFavorites = false;
+}
+
+function addToMyList() {
+  const currentTitle = currentRecipeTitle.innerText
+  const featuredRecipe = currentRecipes.find(recipe => recipe.name === currentTitle);
+  recipeRepo.user.addPlanned(featuredRecipe);
+}
+
+function showPlannedRecipes() {
+  const uniquePlanned = recipeRepo.user.planned.filter((plannedRecipe, index) => {
+    return recipeRepo.user.planned.indexOf(plannedRecipe) === index;
+  })
+  generateRecipeCards(uniquePlanned, 0);
+  prevPageArrow.classList.add('vis-hidden')
+  tagContainer.classList.add('vis-hidden');
 }
 
 function randomizeCardColor(recipeCard) {
@@ -34,8 +69,14 @@ function randomizeCardColor(recipeCard) {
 }
 
 function applyTags() {
-  const tags = recipeRepo.matchTags(currentFilters);
-  const uniqueTags = tags.filter((tag, index) => tags.indexOf(tag) === index);
+  let uniqueTags = [];
+  if (showingFavorites) {
+    const tags = recipeRepo.user.getFavoritesByTags(currentFilters);
+    uniqueTags = tags.filter((tag, index) => tags.indexOf(tag) === index);
+  } else {
+    const tags = recipeRepo.matchTags(currentFilters);
+    uniqueTags = tags.filter((tag, index) => tags.indexOf(tag) === index);
+  }
   generateRecipeCards(uniqueTags, 0);
 }
 
@@ -55,36 +96,77 @@ function removeFeaturedRecipe() {
   currentRecipeInstructions.innerHTML = '';
 }
 
+function showFavorites() {
+  generateRecipeCards(recipeRepo.user.favorites, 0);
+  showingFavorites = true;
+  tagContainer.classList.remove('vis-hidden');
+  showFavBtn.classList.add('button-activated');
+}
+
 function submitSearch(e) {
   e.preventDefault();
   const searchValue = searchForm.querySelector('.search-field').value;
-  console.log(searchValue)
-  // Goal: take this submitted search value
-  // Input: string
-  // Output: new list of recipes
-  // Steps:
-  // if recipe repo.recipes.find
-  // For each recipe get ingredients and then check the name
-  // console.log(matchedName)
-  const matchedName = recipeRepo.recipes.find(recipe => recipe.name.includes(searchValue))
-  let ifFound = 0;
-  recipeRepo.recipes.forEach(recipe => {
-    const currentIngredients = recipe.getIngredients();
+  searchForm.querySelector('.search-field').value = "";
+  if (showingFavorites) {
+    searchFavorites(searchValue, true);
+  } else {
+    const matchedName = recipeRepo.recipes.find(recipe => recipe.name.includes(searchValue));
+    let ingredientFound = false;
+    recipeRepo.recipes.forEach(recipe => {
+      const currentIngredients = recipe.getIngredients();
+      const found = currentIngredients.find(currentIngredient => currentIngredient.nameObj.name.includes(searchValue));
+      if (found) {
+        ingredientFound = found.id;
+      }
+    })
+    if (matchedName) {
+      generateRecipeCards(recipeRepo.matchName(searchValue), 0);
+    } else if (ingredientFound) {
+      generateRecipeCards(recipeRepo.matchIngredient(ingredientFound), 0);
+    }  
+  }
+}
+
+
+function searchFavorites(searchValue) {
+  const matchedName = recipeRepo.user.favorites.find(recipe => recipe.name.toLowerCase().includes(searchValue.toLowerCase()));
+  let ingredientFound = false;
+  recipeRepo.user.favorites.forEach(favorite => {
+    const currentIngredients = favorite.getIngredients();
     const found = currentIngredients.find(currentIngredient => currentIngredient.nameObj.name.includes(searchValue));
     if (found) {
-      // console.log(found)
-      ifFound = found.id;
+      ingredientFound = found.id;
     }
   })
   if (matchedName) {
-    console.log('hello')
-    generateRecipeCards(recipeRepo.matchName(searchValue), 0);
-  } else if (ifFound !== 0) {
-    console.log(recipeRepo.matchIngredient(ifFound))
-    generateRecipeCards(recipeRepo.matchIngredient(ifFound), 0);
+    generateRecipeCards(recipeRepo.user.getFavoritesByName(searchValue), 0);
+  } else if (ingredientFound) {
+    generateRecipeCards(recipeRepo.user.getFavoritesByIngredient(ingredientFound), 0);
   }
-  
 }
+
+function favoriteRecipe() {
+  const favBtnIndex = (this.id.slice(-1) - 1);
+  const favoritedTitle = 
+  recipeCards[favBtnIndex].querySelector('.recipe-title').innerText;
+  const favoritedRecipe = currentRecipes.find(recipe => recipe.name === favoritedTitle);
+  if (recipeRepo.user.favorites.includes(favoritedRecipe)) {
+    favBtns[favBtnIndex].labels[0].classList.remove('fav-checked');
+    recipeRepo.user.removeFavorite(favoritedRecipe);
+  } else {
+    favBtns[favBtnIndex].labels[0].classList.add('fav-checked');
+    recipeRepo.user.addFavorite(favoritedRecipe);
+  }
+}
+
+function determineFavorite(recipe) {
+  if (recipeRepo.user.favorites.includes(recipe)) {
+    return true
+  } else {
+    return false
+  }
+}
+
 
 function clickRecipeCard(e) {
   const currentRecipeCard = e.target.closest('.recipe-card');
@@ -125,7 +207,6 @@ function showFeaturedInfo(featuredRecipe) {
 
 
 function generateRecipeCards(newRecipes, iterationCounter) {  
-  console.log(newRecipes)
   currentRecipes = newRecipes;
   let iterationCount = iterationCounter;
   if (currentRecipes.length - iterationCount <= recipeCards.length) {
@@ -148,6 +229,11 @@ function createCardContents (cardLi, recipe, booleanDecision = false) {
     randomizeCardColor(cardLi.querySelector('.recipe'));
     cardLi.querySelector('.recipe-cost').innerText = `$${recipe.getCost()}`;
     cardLi.classList.remove('vis-hidden');
+    if (determineFavorite(recipe)) {
+      cardLi.querySelector('.favorite-label').classList.add('fav-checked');
+    } else {
+      cardLi.querySelector('.favorite-label').classList.remove('fav-checked');
+    }
     if (booleanDecision) {
       nextPageArrow.classList.remove('vis-hidden');
     }
@@ -155,10 +241,10 @@ function createCardContents (cardLi, recipe, booleanDecision = false) {
 }
 
 function generateLimitedCards(recipeArr) {
-  const recipeCards = recipeList.querySelectorAll('.recipe-card');
   recipeArr.forEach(recipe => {
     let currentRecipeCard = recipeCards[recipeArr.indexOf(recipe)];
     createCardContents(currentRecipeCard, recipe, true);
+    determineFavorite(currentRecipeCard, recipe.name);
   })
   let cardNumber = recipeArr.length;
   recipeCards.forEach(recipeCard => {
@@ -168,7 +254,6 @@ function generateLimitedCards(recipeArr) {
     }
   })
 }
-
 
 function showNextPage() {
   tagContainer.classList.add('vis-hidden');
@@ -196,7 +281,6 @@ function showPrevPage() {
     prevPageArrow.classList.add('vis-hidden');
   }
 }
-
 
 function shuffle(usersData) {
   var userLength = array.length, t, i;
