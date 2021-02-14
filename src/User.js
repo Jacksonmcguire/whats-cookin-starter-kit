@@ -1,4 +1,6 @@
-const Pantry = require('./Pantry');
+// if (typeof module !== undefined) {
+//   Pantry = require('./Pantry');
+// }
 
 class User {
   constructor(userData, ingredientsData) {
@@ -20,12 +22,10 @@ class User {
     }
   }
   getFavoritesByTags(tags) {
-    let filteredFavorites = this.favorites.filter(recipe => {
-      return tags.filter(tag => {
-        return recipe.tags.includes(tag);
-      });
-    });
-    return filteredFavorites;
+    return tags.reduce((acc, tag) => {
+      acc.push(...(this.favorites.filter(recipe => recipe.tags.includes(tag))));
+      return acc;
+    }, []);
   }
 
   getFavoritesByName(recipeName) {
@@ -47,4 +47,6 @@ class User {
   }
 }
 
-module.exports = User;
+if (typeof module !== undefined) {
+  module.exports = User;
+}
