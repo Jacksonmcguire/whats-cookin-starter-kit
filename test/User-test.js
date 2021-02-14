@@ -6,7 +6,9 @@ const User = require('../src/User');
 const recipeTestData = require('../test-data/recipe-test-data');
 const usersData = require('../test-data/user-test-data');
 const ingredientsTestData = require('../test-data/ingredient-test-data');
-
+if (typeof module !== undefined) {
+  Pantry = require('../src/Pantry');
+}
 
 describe ('User', () => {
   const recipeData = recipeTestData.recipeData;

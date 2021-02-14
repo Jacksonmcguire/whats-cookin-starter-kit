@@ -1,6 +1,3 @@
-// const Recipe = require('./Recipe');
-// const User = require('./User');
-
 class RecipeRepo {
   constructor(recipeData, userData, ingredientsData) {
     this.recipes = recipeData.map(recipe => new Recipe(recipe, ingredientsData));
