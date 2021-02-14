@@ -9,14 +9,17 @@
     <section class="sidebar">What's Cookin?</section>
     <main>
       <section class="button-container">
-        <button id="myMealsBtn">My Meals</button>
+        <button id="goHomeBtn">Home</button>
         <button id="showFavBtn">Favorites</button>
         <button id="checkPantry">Check Pantry</button>
         <h1 class="current-recipe-title vis-hidden">Recipe Title</h1>
       </section>
       <section class="current-recipe-container vis-hidden">
         <div class="current-recipe">
-          <button class="cook-btn">Cook</button>
+          <article class="my-list-container">
+            <button class="my-list-btn">My List</button>
+            <button class="cook-btn">Cook</button>
+          </article>
           <h1 class="current-recipe-title"></h1>
           <ul class="current-recipe-ingredients">Ingredients:
           </ul>
@@ -25,7 +28,7 @@
         </div>
       </section>
       <form class="search-container">
-        <label for="searchField">Recipe Search: </label>
+        <label for="searchField">Search for a recipe by name or ingredient: </label>
         <input class="search-field" id="searchField" type="text">
       </form>
     </main>
@@ -33,49 +36,33 @@
       <form class="tag-container">
         <input type="radio" id="antipasti">
         <label for="antipasti">antipasti</label>
-        <input type="radio" id="starter">
-        <label for="starter">starter</label>
         <input type="radio" id="snack">
         <label for="snack">snack</label>
         <input type="radio" id="appetizer">
         <label for="appetizer">appetizer</label>
         <input type="radio" id="antipasto">
         <label for="antipasto">antipasto</label>
-        <input type="radio" id="hor-d'oeuvre">
-        <label for="hor-d'oeuvre">hor d'oeuvre</label>
-        <input type="radio" id="lunch">
-        <label for="lunch">lunch</label>
         <input type="radio" id="main-course">
         <label for="main-course">main course</label>
-        <input type="radio" id="main-dish">
-        <label for="main-dish">main dish</label>
         <input type="radio" id="dinner">
         <label for="dinner">dinner</label>
         <input type="radio" id="sauce">
         <label for="sauce">sauce</label>
         <input type="radio" id="side-dish">
         <label for="side-dish">side dish</label>
-        <input type="radio" id="morning-meal">
-        <label for="morning-meal">morning meal</label>
-        <input type="radio" id="brunch">
-        <label for="brunch">brunch</label>
         <input type="radio" id="breakfast">
         <label for="breakfast">breakfast</label>
         <input type="radio" id="salad">
         <label for="salad">salad</label>
-        <input type="radio"id="condiment">
-        <label for="condiment">condiment</label>
         <input type="radio" id="dip">
         <label for="dip">dip</label>
-        <input type="radio" id="spread">
-        <label for="spread">spread</label>
       </form>
         <ul class="recipe-list">
           <div class="arrow left vis-hidden"></div>
           <li class="recipe-card">
             <div class="recipe">
-              <input type="radio" id="favoriteInput">
-              <label class="favorite-label vis-hidden"for="favoriteInput"></label>
+              <input class="favorite-input" type="radio" id="fav1">
+              <label class="favorite-label vis-hidden"for="fav1"></label>
               <h1 class="recipe-title"></h1>
               <img class="recipe-img" src="" alt="">
               <p class="recipe-cost"></p>
@@ -83,8 +70,8 @@
           </li>
           <li class="recipe-card">
             <div class="recipe">
-            <input type="radio" id="favoriteInput">
-            <label class="favorite-label vis-hidden"for="favoriteInput"></label>
+              <input class="favorite-input" type="radio" id="fav2">
+            <label class="favorite-label vis-hidden"for="fav2"></label>
             <h1 class="recipe-title"></h1>
             <img class="recipe-img" src="" alt="" srcset="">
             <p class="recipe-cost"></p>
@@ -92,8 +79,8 @@
         </li>
         <li class="recipe-card">
           <div class="recipe">
-          <input type="radio" id="favoriteInput">
-          <label class="favorite-label vis-hidden"for="favoriteInput"></label>
+            <input class="favorite-input" type="radio" id="fav3">
+            <label class="favorite-label vis-hidden"for="fav3"></label>
           <h1 class="recipe-title"></h1>
           <img class="recipe-img" src="" alt="" srcset="">
           <p class="recipe-cost"></p>
@@ -101,8 +88,8 @@
       </li>
       <li class="recipe-card">
         <div class="recipe">
-        <input type="radio" id="favoriteInput">
-        <label class="favorite-label vis-hidden"for="favoriteInput"></label>
+          <input class="favorite-input" type="radio" id="fav4">
+          <label class="favorite-label vis-hidden"for="fav4"></label>
         <h1 class="recipe-title"></h1>
         <img class="recipe-img" src="" alt="" srcset="">
         <p class="recipe-cost"></p>
@@ -110,8 +97,8 @@
     </li>
     <li class="recipe-card">
       <div class="recipe">
-      <input type="radio" id="favoriteInput">
-      <label class="favorite-label vis-hidden"for="favoriteInput"></label>
+        <input class="favorite-input" type="radio" id="fav5">
+        <label class="favorite-label vis-hidden"for="fav5"></label>
       <h1 class="recipe-title"></h1>
       <img class="recipe-img" src="" alt="" srcset="">
       <p class="recipe-cost"></p>
@@ -120,14 +107,12 @@
   <div class="arrow right"></div>
 </ul>
 </section>
-<article class="my-list-container">
-  <button class="my-list-btn">+ My List</button>
-</article>
 <script type="text/javascript" src="../data/users.js"></script>
 <script type="text/javascript" src="../data/ingredients.js"></script>
 <script type="text/javascript" src="../data/recipes.js"></script>
 <script type="text/javascript" src="./Ingredient.js"></script>
 <script type="text/javascript" src="Recipe.js"></script>
+<script type="text/javascript" src="./Pantry.js"></script>
 <script type="text/javascript" src="User.js"></script>
 <script type="text/javascript" src="./RecipeRepo.js"></script>
 <script type="text/javascript" src="./scripts.js"></script>
