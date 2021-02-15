@@ -40,7 +40,7 @@ class Pantry {
   }
 
   cookFeature(recipe) {
-      recipe.ingredients.forEach(recipeIngredient => {
+    recipe.ingredients.forEach(recipeIngredient => {
       let recipeAmount = recipeIngredient.quantity.amount;
       let pantryItem = this.pantryData.find(item => {
         return item.ingredient === recipeIngredient.id;

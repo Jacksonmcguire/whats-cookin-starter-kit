@@ -79,9 +79,9 @@ describe ('User', () => {
   });
 
   describe('Favorite List Filtering Methods', () => {
+    let filteredFaves;
 
     beforeEach('add favorites to user favorites', () => {
-      let filteredFaves;
 
       recipeRepo.user.addFavorite(recipeNumberOne);
       recipeRepo.user.addFavorite(recipeRepo.recipes[1]);
