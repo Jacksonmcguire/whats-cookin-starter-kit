@@ -16,7 +16,6 @@ class Recipe {
       return ingredient.id === (recipeIngredient || []).id;
     });
     //console.log("ING DATA", this.ingredientsData);
-
   }
 
   getIngredients() {
@@ -41,13 +40,6 @@ class Recipe {
 
   getInstructions() {
     return this.instructions;
-  }
-
-  cookFeature(recipe) {
-    console.log("ingData:", this.ingredientData);
-    console.log("pantry:", this.pantry);
-    console.log(recipe);
-
   }
 }
 
