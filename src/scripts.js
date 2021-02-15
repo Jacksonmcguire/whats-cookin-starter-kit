@@ -1,8 +1,12 @@
 
-const currentRecipeContainer = document.querySelector('.current-recipe-container');
-const currentRecipeIngredients = currentRecipeContainer.querySelector('.current-recipe-ingredients');
-const currentRecipeInstructions = currentRecipeContainer.querySelector('.current-recipe-instructions');
-const currentRecipeTitle = currentRecipeContainer.querySelector('.current-recipe-title');
+const currentRecipeContainer = document
+  .querySelector('.current-recipe-container');
+const currentRecipeIngredients = currentRecipeContainer
+  .querySelector('.current-recipe-ingredients');
+const currentRecipeInstructions = currentRecipeContainer
+  .querySelector('.current-recipe-instructions');
+const currentRecipeTitle = currentRecipeContainer
+  .querySelector('.current-recipe-title');
 const recipeList = document.querySelector('.recipe-list');
 const tagContainer = document.querySelector('.tag-container');
 const buttonContainer = document.querySelector('.button-container');
@@ -123,7 +127,7 @@ function submitSearch(e) {
       generateRecipeCards(recipeRepo.matchName(searchValue), 0);
     } else if (ingredientFound) {
       generateRecipeCards(recipeRepo.matchIngredient(ingredientFound), 0);
-    }  
+    }
   }
 }
 
@@ -147,7 +151,7 @@ function searchFavorites(searchValue) {
 
 function favoriteRecipe() {
   const favBtnIndex = (this.id.slice(-1) - 1);
-  const favoritedTitle = 
+  const favoritedTitle =
   recipeCards[favBtnIndex].querySelector('.recipe-title').innerText;
   const favoritedRecipe = currentRecipes.find(recipe => recipe.name === favoritedTitle);
   if (recipeRepo.user.favorites.includes(favoritedRecipe)) {
@@ -177,7 +181,7 @@ function clickRecipeCard(e) {
     removeFeaturedRecipe();
     showFeaturedRecipe(currentRecipeTitle);
   }
-};
+}
 
 function clickTagFilter(e) {
   const currentTagBtn = e.target.previousElementSibling;
@@ -199,14 +203,14 @@ function showFeaturedInfo(featuredRecipe) {
     ${instruction.number}: ${instruction.instruction}</p>`;
   })
   featuredRecipe.getIngredients().forEach(ingredientObj => {
-    currentRecipeIngredients.innerText += 
-    ` ${ingredientObj.nameObj.name}: 
+    currentRecipeIngredients.innerText +=
+    ` ${ingredientObj.nameObj.name}:
     ${ingredientObj.quantity.amount} ${ingredientObj.quantity.unit}.`;
   })
 }
 
 
-function generateRecipeCards(newRecipes, iterationCounter) {  
+function generateRecipeCards(newRecipes, iterationCounter) {
   currentRecipes = newRecipes;
   let iterationCount = iterationCounter;
   if (currentRecipes.length - iterationCount <= recipeCards.length) {
@@ -275,23 +279,14 @@ function showPrevPage() {
   const firstRecipe = currentRecipes.find(recipe => recipe.name === firstRecipeTitle);
   const firstRecipeIndex = currentRecipes.indexOf(firstRecipe);
   generateRecipeCards(currentRecipes, firstRecipeIndex - 5);
-  if 
+  if
   (recipeList.querySelector('.recipe-title').innerText === currentRecipes[0].name) {
     tagContainer.classList.remove('vis-hidden');
     prevPageArrow.classList.add('vis-hidden');
   }
 }
 
-function shuffle(usersData) {
-  var userLength = array.length, t, i;
-  while (userLength) {
-    i = Math.floor(Math.random() * userLength--);
-    t = array[userLength];
-    array[userLength] = array[i];
-    array[i] = t;
-  }
-  return usersData;
-}
+
 //when calling RecipeRepo class
 // shuffle usersData first,
 // new RecipeRepo > send usersData[0]

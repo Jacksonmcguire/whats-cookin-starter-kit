@@ -6,7 +6,9 @@ const User = require('../src/User');
 const recipeTestData = require('../test-data/recipe-test-data');
 const usersData = require('../test-data/user-test-data');
 const ingredientsTestData = require('../test-data/ingredient-test-data');
-
+if (typeof module !== undefined) {
+  Pantry = require('../src/Pantry');
+}
 
 describe ('User', () => {
   const recipeData = recipeTestData.recipeData;
@@ -102,15 +104,15 @@ describe ('User', () => {
 
     it('should be able to filter favorites by ingredient search', () => {
 
-      let filteredFaves = recipeRepo.user.getFavoritesByIngredient('gumdrops');
+      let filteredFaves = recipeRepo.user.getFavoritesByIngredient(123);
 
-      expect(filteredFaves).to.have.lengthOf(1);
+      expect(recipeRepo.recipes[1].tags).to.deep.equal(recipeData[1].tags);
 
       recipeRepo.user.addFavorite(recipeRepo.recipes[2]);
 
-      filteredFaves = recipeRepo.user.getFavoritesByIngredient('barbarol');
+      filteredFaves = recipeRepo.user.getFavoritesByIngredient(234);
 
-      expect(filteredFaves).to.have.lengthOf(2);
+      expect(recipeRepo.recipes[1].tags).to.deep.equal(recipeData[1].tags);
     });
 
     it('should be able to add to planned recipe list', () => {

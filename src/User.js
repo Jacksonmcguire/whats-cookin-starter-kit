@@ -1,7 +1,3 @@
-// if (typeof module !== undefined) {
-//   Pantry = require('./Pantry');
-// }
-
 class User {
   constructor(userData, ingredientsData) {
     this.user = userData;

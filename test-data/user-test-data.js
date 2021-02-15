@@ -1,8 +1,10 @@
 const usersData = {
   "name": "Bosphorous Immanuel",
   "id": 42,
-  "pantry": [{"ingredient": 'gumdrops', "amount": 66}, {"ingredient": 'barbarol', "amount": 77}]
+  "pantry": [{"ingredient": 23, "amount": 66}, {"ingredient": 27, "amount": 77}]
+                     // gumdrops                        barbarol
 };
+
 
 
 module.exports = { usersData }
