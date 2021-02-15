@@ -51,28 +51,12 @@ describe ('Pantry', () => {
     });
 
     it('should remove ingredients from pantry when a feature is cooked', () => {
+      //console.log(pantry.pantryData);
       pantry.cookFeature(recipeNumberOne);
-       console.log(pantry.pantryData);
-      expect(pantry.ingredients).to.deep.equal(pantry.ingredients);
+      //console.log(pantry.pantryData);
+      expect(pantry.pantryData).to.deep.equal([
+        { ingredient: 23, amount: 24 },
+        { ingredient: 27, amount: 49 } ]);
     });
-
-    it('should start with a fresh pantry and try that again', () => {
-      pantry.cookFeature(recipeNumberOne);
-      //remove from pantry.pantryData[indexOf(pantry.pantryData.ingredient = recipeNumberOne.name) //ingredient's's index.
-      expect(pantry.ingredients).to.deep.equal(pantry.ingredients);
-    });
-
-    it('should start with a fresh pantry and try that again', () => {
-      pantry.cookFeature(recipeNumberOne);
-
-      expect(pantry.ingredients).to.deep.equal(pantry.ingredients);
-    });
-
-    it('should allow a user to cook a recipe', () => {
-      pantry.cookFeature(recipeNumberOne);
-
-
-    });
-
   });
 });
