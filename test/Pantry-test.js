@@ -14,6 +14,7 @@ describe ('Pantry', () => {
   const ingredientsData = ingredientsTestData.ingredientsData;
   let recipeRepo;
   let recipeNumberOne;
+  let pantry;
 
   beforeEach('create a recipe repository', () => {
     recipeRepo = new RecipeRepo(recipeData, userData, ingredientsData);
@@ -30,9 +31,9 @@ describe ('Pantry', () => {
   });
 
   it('should store multiple ingredients\' names and amounts', () => {
-    expect(pantry.pantryData[0].ingredient).to.deep.equal('gumdrops');
+    expect(pantry.pantryData[0].ingredient).to.deep.equal(23);
     expect(pantry.pantryData[0].amount).to.deep.equal(66);
-    expect(pantry.pantryData[1].ingredient).to.deep.equal('barbarol');
+    expect(pantry.pantryData[1].ingredient).to.deep.equal(27);
     expect(pantry.pantryData[1].amount).to.deep.equal(77);
   });
 
@@ -51,13 +52,13 @@ describe ('Pantry', () => {
 
     it('should remove ingredients from pantry when a feature is cooked', () => {
       pantry.cookFeature(recipeNumberOne);
-      console.log(pantry.pantryData);
+       console.log(pantry.pantryData);
       expect(pantry.ingredients).to.deep.equal(pantry.ingredients);
     });
 
     it('should start with a fresh pantry and try that again', () => {
       pantry.cookFeature(recipeNumberOne);
-
+      //remove from pantry.pantryData[indexOf(pantry.pantryData.ingredient = recipeNumberOne.name) //ingredient's's index.
       expect(pantry.ingredients).to.deep.equal(pantry.ingredients);
     });
 
@@ -70,7 +71,7 @@ describe ('Pantry', () => {
     it('should allow a user to cook a recipe', () => {
       pantry.cookFeature(recipeNumberOne);
 
-      
+
     });
 
   });

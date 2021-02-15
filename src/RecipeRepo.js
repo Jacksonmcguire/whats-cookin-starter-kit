@@ -1,6 +1,7 @@
 class RecipeRepo {
   constructor(recipeData, userData, ingredientsData) {
-    this.recipes = recipeData.map(recipe => new Recipe(recipe, ingredientsData));
+    this.recipes = recipeData
+      .map(recipe => new Recipe(recipe, ingredientsData));
     this.user = new User(userData, ingredientsData);
   }
 

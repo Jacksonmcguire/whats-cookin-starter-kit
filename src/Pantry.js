@@ -4,14 +4,15 @@ class Pantry {
   }
 
   isSupplyFor(recipe) {
-    //console.log("ING DATA:", recipe.ingredientsData)
-    const passingIngredients = recipe.ingredients.filter(ingredient => { //has Id only
+    const passingIngredients = recipe.ingredients.filter(ingredient => {
       let recipeAmount = ingredient.quantity.amount;
+      //console.log("PANTRY DATA:", this.pantryData)
       let pantryItem = this.pantryData.find(item => {
-        //console.log(recipe.IngredientsData);
-        return item.ingredient === (recipe.ingredientsData.find(ing => ing.name === item.ingredient) || []).name;
+        //console.log("ING DATA:", recipe.ingredientsData);
+        return item.ingredient === (recipe.ingredientsData
+          .find(ing => ing.id === item.ingredient) || []).id;
       });
-        //console.log(pantryItem)
+
       return (pantryItem || []).amount > recipeAmount;
     });
     //console.log(passingIngredients.length)
@@ -31,7 +32,7 @@ class Pantry {
     });
     //console.log("MISSING ING:", missingIngredients)
     let missingIngredientName;
-    const missingIngredientNames = missingIngredients.map(ingredient => {
+    missingIngredients.forEach(ingredient => {
       //console.log("THIS:", ingredient.id);
       const missing = recipe.ingredientsData.find(dataIngredient => {
         return dataIngredient.id === ingredient.id;
@@ -46,7 +47,8 @@ class Pantry {
   cookFeature(recipe) {
     //remove ingredients from pantry
     // INPUT: recipe
-    // OUTPUT: None (Updates each ingredient, subtracting amount of recipe from pantry)
+    // OUTPUT: None (Updates each ingredient,
+    //            subtracting amount of recipe from pantry)
 
   }
 
