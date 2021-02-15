@@ -257,9 +257,11 @@ function showFeaturedInfo(featuredRecipe) {
     ${instruction.number}: ${instruction.instruction}</p>`;
   })
   featuredRecipe.getIngredients().forEach(ingredientObj => {
-    currentRecipeIngredients.innerText +=
-    ` ${ingredientObj.nameObj.name}:
-    ${ingredientObj.quantity.amount} ${ingredientObj.quantity.unit}.`;
+    const currentP = document.createElement('p');
+    currentRecipeIngredients.appendChild(currentP);
+    currentP.innerText +=
+    `${ingredientObj.nameObj.name}:
+    ${ingredientObj.quantity.amount.toFixed(2)} ${ingredientObj.quantity.unit}.`;
   })
 }
 
