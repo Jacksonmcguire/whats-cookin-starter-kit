@@ -12,7 +12,6 @@ class Pantry {
         return item.ingredient === (recipe.ingredientsData
           .find(ing => ing.id === item.ingredient) || []).id;
       });
-
       return (pantryItem || []).amount > recipeAmount;
     });
     //console.log(passingIngredients.length)
@@ -24,9 +23,6 @@ class Pantry {
   }
 
   determineMissing(recipe, passingIngredients) {
-    // INPUT: recipe, array missing the ingredient(s) called for
-    // OUTPUT: array of missing ingredients(not amounts)
-    // iterate recipe ingredients and filter to an array of those not found
     const missingIngredients = recipe.ingredients.filter(ingredient => {
       return !passingIngredients.includes(ingredient);
     });
@@ -39,18 +35,21 @@ class Pantry {
       });
       //console.log("missing:", missing.name)
       missingIngredientName = (missing || []).name;
-
     })
     return missingIngredientName;
   }
 
   cookFeature(recipe) {
-    //remove ingredients from pantry
-    // INPUT: recipe
-    // OUTPUT: None (Updates each ingredient,
-    //            subtracting amount of recipe from pantry)
-
+    recipe.ingredients.forEach(recipeIngredient => {
+      let recipeAmount = recipeIngredient.quantity.amount;
+      let pantryItem = this.pantryData.find(item => {
+        return item.ingredient === recipeIngredient.id;
+      });
+      pantryItem.amount -= recipeAmount;
+      // console.log(recipe.ingredients);
+      // console.log(pantryItem.amount, recipeAmount)
+    });
   }
-
 }
+
 module.exports = Pantry;

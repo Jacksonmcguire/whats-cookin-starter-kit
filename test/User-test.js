@@ -79,16 +79,18 @@ describe ('User', () => {
   });
 
   describe('Favorite List Filtering Methods', () => {
+    let filteredFaves;
 
     beforeEach('add favorites to user favorites', () => {
 
       recipeRepo.user.addFavorite(recipeNumberOne);
       recipeRepo.user.addFavorite(recipeRepo.recipes[1]);
+
     });
 
     it('should be able to filter favorites by multiple tags', () => {
 
-      const filteredFaves = recipeRepo.user.getFavoritesByTags(
+      filteredFaves = recipeRepo.user.getFavoritesByTags(
         ['cheerios', 'chocolate']);
 
       expect(filteredFaves).to.have.lengthOf(2);
@@ -96,7 +98,7 @@ describe ('User', () => {
 
     it('should be able to filter favorites by recipe name search', () => {
 
-      const filteredFaves = recipeRepo.user.getFavoritesByName('fluffer-nutter');
+      filteredFaves = recipeRepo.user.getFavoritesByName('fluffer-nutter');
 
       expect(filteredFaves).to.have.lengthOf(1);
 
@@ -104,7 +106,7 @@ describe ('User', () => {
 
     it('should be able to filter favorites by ingredient search', () => {
 
-      let filteredFaves = recipeRepo.user.getFavoritesByIngredient(123);
+      filteredFaves = recipeRepo.user.getFavoritesByIngredient(123);
 
       expect(recipeRepo.recipes[1].tags).to.deep.equal(recipeData[1].tags);
 
