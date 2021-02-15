@@ -9,15 +9,13 @@ class Recipe {
     this.name = recipe.name;
     this.tags = recipe.tags;
     this.ingredientsData = ingredientsData.filter(ingredient => {
-      const recipeIngredient = recipe.ingredients.find(recipeIngredient => {
-        //console.log(recipeIngredient.id);
+      const recipeIngredient = recipe.ingredients.find(recipeIngred => {
         //console.log(ingredient.id);
-        return recipeIngredient.id === ingredient.id
+        return recipeIngred.id === ingredient.id
       });
-      // if (recipeIngredient) {}.id;//data id matches per recipe ings id
       return ingredient.id === (recipeIngredient || []).id;
     });
-    //console.log(this.ingredientsData);
+    //console.log("ING DATA", this.ingredientsData);
 
   }
 
@@ -43,6 +41,13 @@ class Recipe {
 
   getInstructions() {
     return this.instructions;
+  }
+
+  cookFeature(recipe) {
+    console.log("ingData:", this.ingredientData);
+    console.log("pantry:", this.pantry);
+    console.log(recipe);
+
   }
 }
 

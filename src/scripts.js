@@ -1,8 +1,12 @@
 
-const currentRecipeContainer = document.querySelector('.current-recipe-container');
-const currentRecipeIngredients = currentRecipeContainer.querySelector('.current-recipe-ingredients');
-const currentRecipeInstructions = currentRecipeContainer.querySelector('.current-recipe-instructions');
-const currentRecipeTitle = currentRecipeContainer.querySelector('.current-recipe-title');
+const currentRecipeContainer = document
+  .querySelector('.current-recipe-container');
+const currentRecipeIngredients = currentRecipeContainer
+  .querySelector('.current-recipe-ingredients');
+const currentRecipeInstructions = currentRecipeContainer
+  .querySelector('.current-recipe-instructions');
+const currentRecipeTitle = currentRecipeContainer
+  .querySelector('.current-recipe-title');
 const recipeList = document.querySelector('.recipe-list');
 const pantryContainer = document.querySelector('.pantry-container');
 const pantryInfo = document.querySelector('.my-ingredients');
@@ -219,8 +223,8 @@ function showFeaturedInfo(featuredRecipe) {
     ${instruction.number}: ${instruction.instruction}</p>`;
   })
   featuredRecipe.getIngredients().forEach(ingredientObj => {
-    currentRecipeIngredients.innerText += 
-    ` ${ingredientObj.nameObj.name}: 
+    currentRecipeIngredients.innerText +=
+    ` ${ingredientObj.nameObj.name}:
     ${ingredientObj.quantity.amount} ${ingredientObj.quantity.unit}.`;
   })
 }
