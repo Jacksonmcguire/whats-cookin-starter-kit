@@ -71,6 +71,26 @@ main {
   font-size: 2.5vh
 }
 
+.pantry-container {
+  display: flex;
+  flex-flow: column;
+  box-shadow: 0px 0px 2px 2px #4eac17b2;
+  margin: 3%;
+  overflow-y: scroll;
+}
+
+.pantry-ingredient {
+  color: #4eac17b2;
+  font-size: 2.5vh;
+}
+
+.pantry-title {
+  align-self: flex-start;
+  font-size: 2.5vh;
+  font-weight: bolder;
+  color: #4eac17b2;
+}
+
 /* SEARCH CONTAINER */
 .search-container {
   display: flex;
