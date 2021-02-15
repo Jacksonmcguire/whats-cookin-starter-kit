@@ -7,6 +7,10 @@ const currentRecipeInstructions = currentRecipeContainer
   .querySelector('.current-recipe-instructions');
 const currentRecipeTitle = currentRecipeContainer
   .querySelector('.current-recipe-title');
+const currentTitleContainer = currentRecipeContainer
+.querySelector('.current-recipe-title-container')
+const currentRecipeImg = currentRecipeContainer
+.querySelector('.current-recipe-img')
 const recipeList = document.querySelector('.recipe-list');
 const pantryContainer = document.querySelector('.pantry-container');
 const pantryInfo = document.querySelector('.my-ingredients');
@@ -24,6 +28,7 @@ const checkPantryBtn = buttonContainer.querySelector('#checkPantryBtn')
 const favBtns = recipeList.querySelectorAll('.favorite-input');
 const nextPageArrow = recipeList.querySelector('.right');
 const prevPageArrow = recipeList.querySelector('.left');
+const userMessage = document.querySelector('.user-message');
 const recipeRepo = new RecipeRepo(recipeData, 
   usersData[Math.floor(Math.random() * usersData.length)], ingredientsData);
 const recipeCards = recipeList.querySelectorAll('.recipe-card');
@@ -44,6 +49,7 @@ myListBtn.addEventListener('click', addToMyList);
 showPlannedBtn.addEventListener('click', showPlannedRecipes);
 checkPantryBtn.addEventListener('click', checkPantry);
 removeMyList.addEventListener('click', removePlannedRecipe);
+cookBtn.addEventListener('click', cookRecipe);
 
 
 
@@ -136,9 +142,10 @@ function applyTags() {
 }
 
 function showFeaturedRecipe (recipeTitle) {
-  currentRecipeContainer.classList.remove('vis-hidden');
-  currentRecipeTitle.classList.remove('vis-hidden');
-  cookBtn.classList.add('vis-hidden');
+  changeClassName([currentRecipeContainer, currentRecipeTitle], 'vis-hidden');
+  changeClassName([myListBtn], 'hidden');
+  changeClassName([cookBtn], 'vis-hidden', true);
+  changeClassName([removeMyList], 'hidden', true);
   currentRecipeTitle.innerText = recipeTitle;
   const featuredRecipe = currentRecipes.find(recipe => 
     recipe.name === recipeTitle);
@@ -154,9 +161,18 @@ function checkPantrySupply(recipe) {
   if (recipeRepo.user.pantry.isSupplyFor(recipe) === true) {
     cookBtn.classList.remove('vis-hidden')
   } else {
-    alert(
-      `You need ${recipeRepo.user.pantry.isSupplyFor(recipe)} to make ${recipe.name}`);
+    userMessage.innerText = 
+      `You need ${recipeRepo.user.pantry.isSupplyFor(recipe)} to make ${recipe.name}`;
   }
+}
+
+function cookRecipe() {
+  console.log(recipeRepo.user.pantry.pantryData)
+  const currentTitle = currentRecipeTitle.innerText
+  const featuredRecipe = currentRecipes.find(recipe => 
+    recipe.name === currentTitle);
+  recipeRepo.user.pantry.cookFeature(featuredRecipe);
+  console.log(recipeRepo.user.pantry.pantryData)
 }
 
 function removePlannedRecipe() {
@@ -251,7 +267,8 @@ function clickTagFilter(e) {
 }
 
 function showFeaturedInfo(featuredRecipe) {
-  currentRecipeTitle.style.backgroundImage = `url(${featuredRecipe.image})`;
+  currentRecipeImg.src = `${featuredRecipe.image}`;
+  userMessage.innerText = ""
   featuredRecipe.instructions.forEach(instruction => {
     currentRecipeInstructions.innerHTML += `<p class="recipe-instruction">
     ${instruction.number}: ${instruction.instruction}</p>`;
