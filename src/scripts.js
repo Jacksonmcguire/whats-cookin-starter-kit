@@ -15,6 +15,8 @@ const tagContainer = document.querySelector('.tag-container');
 const buttonContainer = document.querySelector('.button-container');
 const searchForm = document.querySelector('.search-container');
 const myListBtn = currentRecipeContainer.querySelector('.my-list-btn');
+const removeMyList = currentRecipeContainer.querySelector('.remove-my-list');
+const cookBtn = currentRecipeContainer.querySelector('.cook-btn')
 const goHomeBtn = buttonContainer.querySelector('#goHomeBtn');
 const showFavBtn = buttonContainer.querySelector('#showFavBtn');
 const showPlannedBtn = buttonContainer.querySelector('#myPlannedBtn');
@@ -25,7 +27,7 @@ const prevPageArrow = recipeList.querySelector('.left');
 const recipeRepo = new RecipeRepo(recipeData, 
   usersData[Math.floor(Math.random() * usersData.length)], ingredientsData);
 const recipeCards = recipeList.querySelectorAll('.recipe-card');
-let showingFavorites = false;
+let pageViewArr = [true, false, false]
 let currentFilters = [];
 let currentRecipes = recipeRepo.recipes;
 
@@ -41,6 +43,7 @@ showFavBtn.addEventListener('click', showFavorites);
 myListBtn.addEventListener('click', addToMyList);
 showPlannedBtn.addEventListener('click', showPlannedRecipes);
 checkPantryBtn.addEventListener('click', checkPantry);
+removeMyList.addEventListener('click', removePlannedRecipe);
 
 
 
@@ -63,12 +66,12 @@ function changeClassName(elementArr, className, change = false) {
 
 function goHome() {
   generateRecipeCards(recipeRepo.recipes, 0);
-  showingFavorites = false;
+  pageViewArr[0] = true;
+  pageViewArr[1] = false; pageViewArr[2] = false;
   changeClassName([tagContainer, nextPageArrow, showPlannedBtn], 'vis-hidden')
-  changeClassName([tagContainer, checkPantryBtn, showFavBtn], 'hidden');
+  changeClassName([tagContainer, checkPantryBtn, showFavBtn, showPlannedBtn], 'hidden');
   changeClassName([pantryContainer], 'hidden', true);
   changeClassName([prevPageArrow, currentRecipeContainer], 'vis-hidden', true);
-
 }
 
 function addToMyList() {
@@ -81,7 +84,11 @@ function showPlannedRecipes() {
   const uniquePlanned = recipeRepo.user.planned.filter((plannedRecipe, index) => {
     return recipeRepo.user.planned.indexOf(plannedRecipe) === index;
   })
+  pageViewArr[2] = true; 
+  pageViewArr[1] = false; pageViewArr[0] = false;
   generateRecipeCards(uniquePlanned, 0);
+  checkPantry();
+  changeClassName([tagContainer], 'hidden', true);
   changeClassName([prevPageArrow, showPlannedBtn], 'vis-hidden', true);
 }
 
@@ -91,11 +98,13 @@ function randomizeCardColor(recipeCard) {
   recipeCard.classList = `recipe ${color}`;
 }
 function checkPantry() {
+  pageViewArr[1] = false; pageViewArr[2] = true;
   tagContainer.classList.add('hidden');
   pantryContainer.classList.remove('hidden');
   pantryTitle.innerText = `${recipeRepo.user.name}'s Pantry`;
   showPantry();
-  changeClassName([tagContainer, checkPantryBtn], 'hidden', true);
+  changeClassName([tagContainer, checkPantryBtn, showFavBtn], 'hidden', true);
+  changeClassName([pantryContainer, showPlannedBtn], 'hidden');
 }
 
 function showPantry() {
@@ -116,7 +125,7 @@ function showPantry() {
 
 function applyTags() {
   let uniqueTags = [];
-  if (showingFavorites) {
+  if (pageViewArr[1]) {
     const tags = recipeRepo.user.getFavoritesByTags(currentFilters);
     uniqueTags = tags.filter((tag, index) => tags.indexOf(tag) === index);
   } else {
@@ -129,9 +138,34 @@ function applyTags() {
 function showFeaturedRecipe (recipeTitle) {
   currentRecipeContainer.classList.remove('vis-hidden');
   currentRecipeTitle.classList.remove('vis-hidden');
+  cookBtn.classList.add('vis-hidden');
   currentRecipeTitle.innerText = recipeTitle;
-  const featuredRecipe = currentRecipes.find(recipe => recipe.name === recipeTitle);
+  const featuredRecipe = currentRecipes.find(recipe => 
+    recipe.name === recipeTitle);
   showFeaturedInfo(featuredRecipe);
+  if (pageViewArr[2]) {
+    checkPantrySupply(featuredRecipe);
+  }
+}
+
+function checkPantrySupply(recipe) {
+  myListBtn.classList.add('hidden');
+  removeMyList.classList.remove('hidden');
+  if (recipeRepo.user.pantry.isSupplyFor(recipe) === true) {
+    cookBtn.classList.remove('vis-hidden')
+  } else {
+    alert(
+      `You need ${recipeRepo.user.pantry.isSupplyFor(recipe)} to make ${recipe.name}`);
+  }
+}
+
+function removePlannedRecipe() {
+  const currentTitle = currentRecipeTitle.innerText
+  const featuredRecipe = currentRecipes.find(recipe => 
+    recipe.name === currentTitle);
+  const recipeIndex = recipeRepo.user.planned.indexOf(featuredRecipe);
+  recipeRepo.user.planned.splice(recipeIndex, 1);
+  showPlannedRecipes()
 }
 
 function removeFeaturedRecipe() {
@@ -144,17 +178,17 @@ function removeFeaturedRecipe() {
 
 function showFavorites() {
   generateRecipeCards(recipeRepo.user.favorites, 0);
-  showingFavorites = true;
+  pageViewArr[1] = true; pageViewArr[0] = false;
   tagContainer.classList.remove('vis-hidden');
   showFavBtn.classList.add('hidden');
-  
+  changeClassName([showFavBtn, checkPantryBtn, showPlannedBtn], 'hidden', true)
 }
 
 function submitSearch(e) {
   e.preventDefault();
   const searchValue = searchForm.querySelector('.search-field').value;
   searchForm.querySelector('.search-field').value = "";
-  if (showingFavorites) {
+  if (pageViewArr[1]) {
     determineSearch(searchValue, recipeRepo.user.favorites)
   } else {
     determineSearch(searchValue, recipeRepo.recipes)
@@ -204,7 +238,7 @@ function favoriteRecipe() {
 
 
 function clickTagFilter(e) {
-  const currentTagBtn = e.target.previousElementSibling;
+  const currentTagBtn = e.target.closest('input');
   const currentTagName = currentTagBtn.id.replace('-', ' ')
   if (currentFilters.includes(currentTagName)) {
     currentTagBtn.labels[0].classList.remove('tag-label-checked');
@@ -272,7 +306,6 @@ function generateLimitedCards(recipeArr) {
 }
 
 function generateRecipeCards(newRecipes, iterationCounter) {  
-  console.log(newRecipes)
   currentRecipes = newRecipes;
   let iterationCount = iterationCounter;
   if (currentRecipes.length - iterationCount <= recipeCards.length) {
