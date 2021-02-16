@@ -1,51 +1,29 @@
-# What's Cookin'? Starter Kit 
-
-The details of this project are outlined in the <a href="https://frontend.turing.io/projects/whats-cookin.html" target="\__blank">project spec</a>.
-
-## Set Up 
-
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. Both group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run npm install to install project dependencies.
-4. Run open src/index.html in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page)
-5. Make sure both members of your team are collaborators on the forked repo.
-
-## Testing 
-
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran npm install, then the tooling you need to start testing is already installed (mocha and chai).
-
-## Linting Your Code 
-
-Run the command in your terminal npm run lint to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
-
-Your linter will look only at the JavaScript files you have within the src and the test directories.
+## What's Cooking?
 
 
-## Data Model
-### Users
-```js
-{
-  "id": [number],
-  "name": [string],
-  "pantry": [array of objects with amount and ingredient id properties]
-},
-```
+### User:
+#### Each user has a pantry in which they store their ingredients.  They have access to a number of recipes and may add them to either their favorites or a list of planned meals.  As a user you may cook a meal if you have the required ingredients.  This will remove the items from your pantry.  
 
-### Recipes
-```js
-{
-  "ingredients" [array of objects with ingredients ids(connection to ingredients), ingredient names, and quantity data],
-  "instructions": [array of objects with instructions properties and numbered steps],
-  "name": [string],
-  "tags": [array of strings representing info about the recipes]
-}
-```
+#### 1. Take a look around in the cookbook and if you think you may like a recipe, click on it's star at the top right to favorite it. At any point inside or outside of your favorites tab you may unfavorite it.
 
-### Ingredients
-```js
-{
-  "estimatedCostInCents": [number],
-  "id": [number -- connection to users and recipes],
-  "name": [string]
-}
-```
+#### 2. Clicking on a recipe will bring it into a feature box where you may see it's Ingredients, any ingredients that may be missing out of your cupboard, and the instructions to follow when cooking.
+
+#### 3. From the feature window, Clicking 'Add to my Planned Recipes" button will add this recipe to your list of planned recipes for the week. At any point you may remove the recipe with the "Remove from my Planned Recipes" button.
+
+#### 4. To view your Planned Recipes, click the "Planned Recipes" button in your User menu at the top left. 
+
+#### 5. To view your Favorite Recipes, click the "Favorites" button in your User menu at the top left.
+
+#### 6.  To cook a meal, when you have it chosen as a feature and are ready to follow the instructions, click the "Cook" button at the top left of the feature window.  This will ensure that your pantry is updated to the proper amounts of ingredients.
+
+---
+
+
+
+
+
+
+
+
+### Jackson McGuire & Chuck Morris
+### Turing School of Software and Design
