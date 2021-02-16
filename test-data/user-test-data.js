@@ -22,7 +22,7 @@ const usersData = {
       "ingredient": 24,
       "amount": 54
     }
-  ]                     // gumdrops                        barbarol
+  ]                                         
 };
 
 
