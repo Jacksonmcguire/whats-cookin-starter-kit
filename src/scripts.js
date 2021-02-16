@@ -24,7 +24,6 @@ const cookBtn = currentRecipeContainer.querySelector('.cook-btn')
 const goHomeBtn = buttonContainer.querySelector('#goHomeBtn');
 const showFavBtn = buttonContainer.querySelector('#showFavBtn');
 const showPlannedBtn = buttonContainer.querySelector('#myPlannedBtn');
-const checkPantryBtn = buttonContainer.querySelector('#checkPantryBtn')
 const favBtns = recipeList.querySelectorAll('.favorite-input');
 const nextPageArrow = recipeList.querySelector('.right');
 const prevPageArrow = recipeList.querySelector('.left');
@@ -47,7 +46,6 @@ goHomeBtn.addEventListener('click', goHome);
 showFavBtn.addEventListener('click', showFavorites);
 myListBtn.addEventListener('click', addToMyList);
 showPlannedBtn.addEventListener('click', showPlannedRecipes);
-checkPantryBtn.addEventListener('click', checkPantry);
 removeMyList.addEventListener('click', removePlannedRecipe);
 cookBtn.addEventListener('click', cookRecipe);
 
@@ -75,11 +73,10 @@ function goHome() {
   pageViewArr[0] = true;
   pageViewArr[1] = false; pageViewArr[2] = false;
   changeClassName([tagContainer, nextPageArrow, showPlannedBtn, searchForm], 'vis-hidden')
-  changeClassName([tagContainer, checkPantryBtn, showFavBtn, showPlannedBtn], 'hidden');
+  changeClassName([tagContainer, showFavBtn, showPlannedBtn], 'hidden');
   eraseTags();
   changeClassName([prevPageArrow, currentRecipeContainer], 'vis-hidden', true);
   changeClassName([pantryContainer], 'hidden', true);
-  console.log(prevPageArrow.classList)
 }
 
 function eraseTags() {
@@ -93,6 +90,22 @@ function addToMyList() {
   const currentTitle = currentRecipeTitle.innerText
   const featuredRecipe = currentRecipes.find(recipe => recipe.name === currentTitle);
   recipeRepo.user.addPlanned(featuredRecipe);
+}
+
+function searchFavorites(searchValue, decision = false) {
+  if (decision) {
+    generateRecipeCards(recipeRepo.user.getFavoritesByIngredient(searchValue), 0);
+  } else {
+    generateRecipeCards(recipeRepo.user.getFavoritesByName(searchValue), 0);
+  }
+}
+
+function determineFavorite(recipe) {
+  if (recipeRepo.user.favorites.includes(recipe)) {
+    return true
+  } else {
+    return false
+  }
 }
 
 function showPlannedRecipes() {
@@ -118,8 +131,8 @@ function checkPantry() {
   pantryContainer.classList.remove('hidden');
   pantryTitle.innerText = `${recipeRepo.user.name}'s Pantry`;
   showPantry();
-  changeClassName([tagContainer, checkPantryBtn, showFavBtn], 'hidden', true);
-  changeClassName([pantryContainer, showPlannedBtn], 'hidden');
+  changeClassName([tagContainer], 'hidden', true);
+  changeClassName([pantryContainer], 'hidden');
 }
 
 function showPantry() {
@@ -133,7 +146,8 @@ function showPantry() {
     const matchingRecipeIngredient = matchingRecipe
       .ingredients.find(ingredient => ingredient.id === matchingIngredient.id);
     currentP.innerText = 
-    `${matchingIngredient.name}, ${ingredientObj.amount} ${matchingRecipeIngredient.quantity.unit}`;
+    `${matchingIngredient.name}, ${ingredientObj
+      .amount} ${matchingRecipeIngredient.quantity.unit}`;
     currentP.classList.add('pantry-ingredient');
   })
 }
@@ -149,6 +163,7 @@ function applyTags() {
   }
   generateRecipeCards(uniqueTags, 0);
 }
+
 
 function showFeaturedRecipe (recipeTitle) {
   changeClassName([currentRecipeContainer, currentRecipeTitle], 'vis-hidden');
@@ -176,17 +191,14 @@ function checkPantrySupply(recipe) {
 }
 
 function cookRecipe() {
-  console.log(recipeRepo.user.pantry.pantryData)
   const currentTitle = currentRecipeTitle.innerText
   const featuredRecipe = currentRecipes.find(recipe => 
     recipe.name === currentTitle);
   recipeRepo.user.pantry.cookFeature(featuredRecipe);
-  console.log(recipeRepo.user.pantry.pantryData)
 }
 
 function removePlannedRecipe() {
   const currentTitle = currentRecipeTitle.innerText
-  console.log(currentTitle)
   const featuredRecipe = currentRecipes.find(recipe => 
     recipe.name === currentTitle);
   const recipeIndex = recipeRepo.user.planned.indexOf(featuredRecipe);
@@ -207,7 +219,7 @@ function showFavorites() {
   pageViewArr[1] = true; pageViewArr[0] = false;
   tagContainer.classList.remove('vis-hidden');
   showFavBtn.classList.add('hidden');
-  changeClassName([showFavBtn, checkPantryBtn, showPlannedBtn], 'hidden', true)
+  changeClassName([showFavBtn, prevPageArrow], 'hidden', true)
 }
 
 function submitSearch(e) {
@@ -221,21 +233,6 @@ function submitSearch(e) {
   }
 }  
   
-function searchFavorites(searchValue, decision = false) {
-  if (decision) {
-    generateRecipeCards(recipeRepo.user.getFavoritesByIngredient(searchValue), 0);
-  } else {
-    generateRecipeCards(recipeRepo.user.getFavoritesByName(searchValue), 0);
-  }
-}
-
-function determineFavorite(recipe) {
-  if (recipeRepo.user.favorites.includes(recipe)) {
-    return true
-  } else {
-    return false
-  }
-}
 
 function clickRecipeCard(e) {
   const currentRecipeCard = e.target.closest('.recipe-card');
@@ -261,7 +258,6 @@ function favoriteRecipe() {
     recipeRepo.user.addFavorite(favoritedRecipe);
   }
 }
-
 
 function clickTagFilter(e) {
   const currentTagBtn = e.target.closest('input');
@@ -312,8 +308,8 @@ function showPrevPage() {
   const firstRecipe = currentRecipes.find(recipe => recipe.name === firstRecipeTitle);
   const firstRecipeIndex = currentRecipes.indexOf(firstRecipe);
   generateRecipeCards(currentRecipes, firstRecipeIndex - 5);
-  if 
-  (recipeList.querySelector('.recipe-title').innerText === currentRecipes[0].name) {
+  if (recipeList.querySelector('.recipe-title')
+    .innerText === currentRecipes[0].name) {
     tagContainer.classList.remove('vis-hidden');
     prevPageArrow.classList.add('vis-hidden');
   }
@@ -329,8 +325,8 @@ function generateLimitedCards(recipeArr) {
   recipeCards.forEach(recipeCard => {
     if (Array.from(recipeCards).indexOf(recipeCard) >= cardNumber) {
       recipeCard.classList.add('vis-hidden');
-      nextPageArrow.classList.add('vis-hidden');
     }
+    nextPageArrow.classList.add('vis-hidden');
   })
 }
 
@@ -343,7 +339,7 @@ function generateRecipeCards(newRecipes, iterationCounter) {
     recipeCards.forEach(recipeCard => {
       const currentRecipe = newRecipes[iterationCount];
       iterationCount ++;
-      createCardContents(recipeCard, currentRecipe, true);
+      createCardContents(recipeCard, currentRecipe);
     });
   } else {
     nextPageArrow.classList.add('vis-hidden');
@@ -351,7 +347,7 @@ function generateRecipeCards(newRecipes, iterationCounter) {
 }
 
 
-function createCardContents (cardLi, recipe, booleanDecision = false) {
+function createCardContents (cardLi, recipe) {
   if (cardLi) {
     cardLi.querySelector('.recipe-title').innerText = recipe.name;
     cardLi.querySelector('.recipe-img').src = recipe.image;
@@ -363,8 +359,8 @@ function createCardContents (cardLi, recipe, booleanDecision = false) {
     } else {
       cardLi.querySelector('.favorite-label').classList.remove('fav-checked');
     }
-    if (booleanDecision) {
-      nextPageArrow.classList.remove('vis-hidden');
+    if (currentRecipes.length >= recipeCards.length) {
+      // nextPageArrow.classList.remove('vis-hidden');
     }
   }
 }
