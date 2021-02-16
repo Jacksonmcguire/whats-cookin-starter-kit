@@ -186,6 +186,7 @@ function cookRecipe() {
 
 function removePlannedRecipe() {
   const currentTitle = currentRecipeTitle.innerText
+  console.log(currentTitle)
   const featuredRecipe = currentRecipes.find(recipe => 
     recipe.name === currentTitle);
   const recipeIndex = recipeRepo.user.planned.indexOf(featuredRecipe);

@@ -157,8 +157,12 @@ main {
 }
 
 .user-message {
+  height: 100%;
   align-self: flex-end;
-  margin-bottom: 5%;
+  /* white-space: nowrap; */
+  overflow-y: scroll;
+  margin-bottom: 1%;
+  /* overflow-y: scroll; */
 }
 
 .current-recipe-instructions {
