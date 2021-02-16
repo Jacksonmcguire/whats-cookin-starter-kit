@@ -11,7 +11,7 @@
       <section class="button-container">
         <button id="goHomeBtn">Home</button>
         <button id="showFavBtn">Favorites</button>
-        <button id="checkPantry">Check Pantry</button>
+        <button id="checkPantryBtn">Check Pantry</button>
         <button id="myPlannedBtn">Planned Recipes</button>
         <h1 class="current-recipe-title vis-hidden">Recipe Title</h1>
       </section>
@@ -19,9 +19,14 @@
         <div class="current-recipe">
           <article class="my-list-container">
             <button class="my-list-btn">My List</button>
-            <button class="cook-btn">Cook</button>
+            <button class="remove-my-list my-list-btn hidden">Remove from My List</button>
+            <button class="cook-btn vis-hidden">Cook</button>
           </article>
-          <h1 class="current-recipe-title"></h1>
+          <div class="current-recipe-title-container">
+            <h1 class="current-recipe-title"></h1>
+            <img src="" alt="featured recipe" class="current-recipe-img">
+            <p class="user-message"><p>
+          </div> 
           <ul class="current-recipe-ingredients">Ingredients:
           </ul>
           <ul class="current-recipe-instructions">
@@ -34,6 +39,11 @@
       </form>
     </main>
     <section class="interactive-area">
+      <section class="pantry-container hidden">
+        <h1 class="pantry-title"></h1>
+        <article class="my-ingredients">
+        </article>
+      </section>
       <form class="tag-container">
         <input type="radio" id="antipasti">
         <label for="antipasti">antipasti</label>
