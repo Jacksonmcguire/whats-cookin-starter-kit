@@ -1,7 +1,7 @@
 
 html, body {
   height: 100%;
-  font-family: 'Kalam';
+  font-family: 'Poiret One';
   background-image: url(../data/wooden-shelf-product-background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -40,11 +40,12 @@ main {
   height: 30px;
   transform-origin: bottom left;
   position: absolute;
-  left: 30px;
+  left: 35px;
   bottom: 0;
   transform: rotate(-90deg);
   text-align: center;
   color: #000000;
+  padding-bottom: .5%;
   border-bottom: solid;
   font-size: 2em;
   font-weight: bold;
@@ -56,10 +57,6 @@ main {
   align-items: flex-start;
   width: 40%;
   align-self: flex-start;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: bottom;
   border-radius: .5%;
   flex-flow: column;
   margin-left: 2%;
@@ -72,7 +69,7 @@ main {
   color: #000000;
   margin: 7%;
   text-align: center;
-  height: 10%;
+  height: 1vh;
   font-size: 2.5vh
 }
 
@@ -144,25 +141,16 @@ main {
   color: #000000;
   border-radius: 5%;
   margin: 1% 5% 3% 0;
-  height: 100%;
 }
 
 .current-recipe-img {
-  height: 35vh;
-  width: 35vh;
-}
-
-.current-recipe-title {
-  height: 100%;
+  width: 100%;
 }
 
 .user-message {
   height: 100%;
   align-self: flex-end;
-  /* white-space: nowrap; */
-  overflow-y: scroll;
   margin-bottom: 1%;
-  /* overflow-y: scroll; */
 }
 
 .current-recipe-instructions {
@@ -189,8 +177,9 @@ main {
 
 
 .cook-btn {
-  color: #5db8c4d8;
-  border: none;
+  color: #000000;
+  background-color: transparent;
+  align-self: center;
   border-radius: 20px;
   margin: 50% 0 3% 3%;
 }
@@ -206,9 +195,7 @@ main {
 .my-list-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   width: 10%;
-  height: 10%;
   margin: 1%;
   padding: 1%;
 }
@@ -227,7 +214,6 @@ main {
   justify-content: space-around;
   flex-flow: column wrap;
   height: 100%;
-  width: 100%;
   border-radius: 20px;
   margin: 0px 5% 10% 10%;
 }
@@ -252,7 +238,7 @@ input[type="radio"] {
   font-size: 2.51vh;
 }
 
-/* Recipe */
+/* RECIPE CARDS */
 
 .recipe-list {
   display: flex;
@@ -291,7 +277,6 @@ input[type="radio"] {
   opacity: 0.85;
   align-self: flex-end;
   transition: transform 500ms;
-
 }
 
 /* RECIPE WHEN HOVERED */
@@ -303,11 +288,6 @@ input[type="radio"] {
   animation-duration: .5s;
 }
 
-.recipe-card:hover ~ .recipe {
-  transform: translateX(25%);
-}
-
-
 .recipe-card:hover .recipe-img {
   height: 20vh;
   width: 20vh;
@@ -318,6 +298,7 @@ input[type="radio"] {
 /* RECIPE INFO */
 
 .recipe-title {
+  text-align: right;
   font-size: 2.2vh;
   margin: 15% 2% 0px 5%;
   color: inherit;
@@ -329,10 +310,9 @@ input[type="radio"] {
   color: inherit;
 }
 
-/* RECIPE BUTTONS */
+/* FAVORITE BUTTONS */
 .favorite-label {
-  align-self: flex-end;
-  margin-bottom: -40%;
+  align-self: flex-start;
   height: 30px;
   width: 30px;
   background-image: url("https://image.flaticon.com/icons/png/512/109/109697.png");
@@ -415,4 +395,108 @@ input[type="radio"] {
 
 .vis-hidden {
   visibility: hidden;
+}
+
+/* TABLET */
+
+@media screen and (max-width: 800px) {
+  .interactive-container {
+    width: 60%;
+  }
+  
+  .my-list-container {
+    margin: 5%;
+  }
+
+  .current-recipe-title-container {
+    width: 30%;
+  }
+  
+  .current-recipe-title {
+    font-size: 1em;
+  }
+  
+  .recipe-list {
+    margin-left: 5%;
+  }
+  
+  .recipe {
+    width: 12vh;
+  }
+  
+  .recipe-img {
+    width: 50%;
+  }
+  
+  .tag-container {
+    flex-flow: column wrap;
+  }
+
+  .sidebar {
+    display: none;
+  }
+  
+  .button-container {
+    margin-top: 10%;
+    margin-left: 5%;
+    width: 20%;
+  }
+
+  .button-container > button {
+    margin: 15%;
+  }
+
+  .tag-container > label {
+    font-size: 1em;
+  }
+
+  .my-list-btn {
+    padding: .5vh;
+    overflow-y: hidden;
+  }
+
+  .pantry-container {
+    overflow: visible; 
+    width: 100%;
+  }
+  .my-ingredients {
+    overflow-y: scroll;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  
+  .interactive-container {
+    width: 40%;
+  }
+
+  .current-recipe-title-container {
+    width: 20%;
+  }
+
+  .recipe {
+    width: 7vh;
+    margin-top: 50%;
+  }
+  
+  .recipe-card {
+    margin-right: -1%;
+  }
+
+  .recipe-img {
+    width: 25%;
+  }
+
+  .tag-container {
+    width: 10%;
+    /* height: 20%; */
+    flex-flow: column;
+  }
+
+  .button-container {
+    margin-left: 3%;
+    width: 60%
+  }
+
 }
