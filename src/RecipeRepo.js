@@ -2,7 +2,7 @@ class RecipeRepo {
   constructor(recipeData, userData, ingredientsData) {
     this.recipes = recipeData
       .map(recipe => new Recipe(recipe, ingredientsData));
-    this.user = new User(userData, ingredientsData);
+    this.user = new User(userData);
   }
 
   matchTags(tags) {
@@ -16,7 +16,6 @@ class RecipeRepo {
   matchIngredient(ingredientId) {
     return this.recipes.filter(recipe => {
       return recipe.ingredients.find(ingredient => {
-        //console.log(ingredient.id === ingredientId);
         return ingredient.id === ingredientId
       });
     })

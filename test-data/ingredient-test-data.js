@@ -22,7 +22,12 @@ const ingredientsData = [
   {
     "id": 89,
     "name": "pistachios",
-    "estimatedCostInCents": 3498576
+    "estimatedCostInCents": 349
+  },
+  {
+    "id": 24,
+    "name": "bootstraps",
+    "estimatedCostInCents": 85
   }
 
 ];
