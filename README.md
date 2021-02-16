@@ -25,5 +25,5 @@
 
 
 
-### Jackson McGuire & Chuck Morris
-### Turing School of Software and Design
+### [Jackson McGuire](https://github.com/Jacksonmcguire) & [Chuck Morris](https://github.com/percworld)
+### [Turing School of Software and Design](https://turing.io/programs/?gclid=Cj0KCQiA962BBhCzARIsAIpWEL2-Y9JxknMSsp6VvxDo7JhiVuRIZ10RTcD90NvJXyZuqkUB3R8BY5AaAkXlEALw_wcB)
