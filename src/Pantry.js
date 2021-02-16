@@ -31,12 +31,12 @@ class Pantry {
           .find(ing => ing.id === item.ingredient) || []).id;
       });
       if (pantryItem) {
-        console.log('FOUND PANTRY ITEM: ', pantryItem)
-        console.log('RecipeAmount: ', recipeAmount);
+        //console.log('FOUND PANTRY ITEM: ', pantryItem)
+        //console.log('RecipeAmount: ', recipeAmount);
         return pantryItem.amount >= recipeAmount;
       } else return false;
     });
-    console.log("passingIngredients.length", passingIngredients.length)
+    //console.log("passingIngredients.length", passingIngredients.length)
     if (passingIngredients.length === ingredients.length) {
       return true;
     } else {
@@ -96,14 +96,14 @@ class Pantry {
     ingredients.forEach(recipeIngredient => {
       let recipeAmount = recipeIngredient.quantity.amount;
       let pantryItem = this.pantryData.find(item => {
-        console.log('COOK FUNC PANTRY ITEM ING ID: ', item.ingredient, "RECIPE ID: ", recipeIngredient.id)
+        //console.log('COOK FUNC PANTRY ITEM ING ID: ', item.ingredient, "RECIPE ID: ", recipeIngredient.id)
         return item.ingredient === recipeIngredient.id;
       });
-      console.log("pantryItem: ", pantryItem)
-      console.log("recipeAmount needs: ", recipeAmount)
-      console.log("pantryItem amount: ", pantryItem.amount )
+      //console.log("pantryItem: ", pantryItem)
+      //console.log("recipeAmount needs: ", recipeAmount)
+      //console.log("pantryItem amount: ", pantryItem.amount )
       pantryItem.amount -= recipeAmount;
-      console.log("ingredients: ", ingredients);
+      //console.log("ingredients: ", ingredients);
     });
   }
 }
