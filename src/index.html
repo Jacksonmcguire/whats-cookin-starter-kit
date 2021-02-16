@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Whats Cookin</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -11,7 +13,7 @@
       <section class="button-container">
         <button id="goHomeBtn">Home</button>
         <button id="showFavBtn">Favorites</button>
-        <button id="checkPantryBtn">Check Pantry</button>
+        <!-- <button id="checkPantryBtn">Check Pantry</button> -->
         <button id="myPlannedBtn">Planned Recipes</button>
         <h1 class="current-recipe-title vis-hidden">Recipe Title</h1>
       </section>
@@ -38,7 +40,7 @@
         <input class="search-field" id="searchField" type="text">
       </form>
     </main>
-    <section class="interactive-area">
+    <section class="interactive-container">
       <section class="pantry-container hidden">
         <h1 class="pantry-title"></h1>
         <article class="my-ingredients">
@@ -51,8 +53,6 @@
         <label for="snack">snack</label>
         <input type="radio" id="appetizer">
         <label for="appetizer">appetizer</label>
-        <input type="radio" id="antipasto">
-        <label for="antipasto">antipasto</label>
         <input type="radio" id="main-course">
         <label for="main-course">main course</label>
         <input type="radio" id="dinner">

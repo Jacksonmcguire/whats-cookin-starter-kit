@@ -74,10 +74,19 @@ function goHome() {
   generateRecipeCards(recipeRepo.recipes, 0);
   pageViewArr[0] = true;
   pageViewArr[1] = false; pageViewArr[2] = false;
-  changeClassName([tagContainer, nextPageArrow, showPlannedBtn], 'vis-hidden')
+  changeClassName([tagContainer, nextPageArrow, showPlannedBtn, searchForm], 'vis-hidden')
   changeClassName([tagContainer, checkPantryBtn, showFavBtn, showPlannedBtn], 'hidden');
-  changeClassName([pantryContainer], 'hidden', true);
+  eraseTags();
   changeClassName([prevPageArrow, currentRecipeContainer], 'vis-hidden', true);
+  changeClassName([pantryContainer], 'hidden', true);
+  console.log(prevPageArrow.classList)
+}
+
+function eraseTags() {
+  const tags = tagContainer.querySelectorAll('input');
+  tags.forEach(tag => {
+    tag.labels[0].classList.remove('tag-label-checked');
+  })
 }
 
 function addToMyList() {
@@ -95,7 +104,7 @@ function showPlannedRecipes() {
   generateRecipeCards(uniquePlanned, 0);
   checkPantry();
   changeClassName([tagContainer], 'hidden', true);
-  changeClassName([prevPageArrow, showPlannedBtn], 'vis-hidden', true);
+  changeClassName([prevPageArrow, showPlannedBtn, searchForm], 'vis-hidden', true);
 }
 
 function randomizeCardColor(recipeCard) {
