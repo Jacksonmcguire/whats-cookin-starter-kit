@@ -3,24 +3,6 @@ class Pantry {
     this.pantryData = userPantryData;
   }
 
-  // isSupplyFor(recipe) {
-  //   const passingIngredients = recipe.ingredients.filter(ingredient => {
-  //     let recipeAmount = ingredient.quantity.amount;
-  //     //console.log("PANTRY DATA:", this.pantryData)
-  //     let pantryItem = this.pantryData.find(item => {
-  //       //console.log("ING DATA:", recipe.ingredientsData);
-  //       return item.ingredient === (recipe.ingredientsData
-  //         .find(ing => ing.id === item.ingredient) || []).id;
-  //     });
-  //     return (pantryItem || []).amount > recipeAmount;
-  //   });
-  //   //console.log(passingIngredients.length)
-  //   if (passingIngredients.length === recipe.ingredients.length) {
-  //     return true;
-  //   } else {
-  //     return this.determineMissing(recipe, passingIngredients);
-  //   }
-  // }
   isSupplyFor({ id, ingredients, ingredientsData }) {
     const passingIngredients = ingredients.filter(ingredient => {
       let recipeAmount = ingredient.quantity.amount;
@@ -44,22 +26,6 @@ class Pantry {
     }
   }
 
-  // determineMissing(recipe, passingIngredients) {
-  //   const missingIngredients = recipe.ingredients.filter(ingredient => {
-  //     return !passingIngredients.includes(ingredient);
-  //   });
-  //   //console.log("MISSING ING:", missingIngredients)
-  //   let missingIngredientName;
-  //   const missingIngredientsNames = missingIngredients.map(ingredient => {
-  //     //console.log("THIS:", ingredient.id);
-  //     const missing = recipe.ingredientsData.find(dataIngredient => {
-  //       return dataIngredient.id === ingredient.id;
-  //     });
-  //     //console.log("missing:", missing.name)
-  //     missingIngredientName = (missing || []).name;
-  //   })
-  //   return missingIngredientsNames;
-  // }
 
   determineMissing(ingredientsData, passingIngredients) {
     //console.log("PASSING INGREDIENT ARRAY:", passingIngredients)
@@ -69,10 +35,9 @@ class Pantry {
       return !foundId;
     });
     //console.log("MISSING INGREDIENT ARRAY:", missingIngredients)
-    let missingIngredient;
     const missingIngredientsNames = missingIngredients.map(ingredient => {
     //console.log("THIS:", ingredient.id);
-      missingIngredient = ingredientsData.find(dataIngredient => {
+      let missingIngredient = ingredientsData.find(dataIngredient => {
         return dataIngredient.id === ingredient.id;
       });
       //console.log("missing:", missingIngredient.name)
@@ -107,5 +72,39 @@ class Pantry {
     });
   }
 }
+// determineMissing(recipe, passingIngredients) {
+  //   const missingIngredients = recipe.ingredients.filter(ingredient => {
+    //     return !passingIngredients.includes(ingredient);
+    //   });
+    //   //console.log("MISSING ING:", missingIngredients)
+    //   let missingIngredientName;
+    //   const missingIngredientsNames = missingIngredients.map(ingredient => {
+      //     //console.log("THIS:", ingredient.id);
+      //     const missing = recipe.ingredientsData.find(dataIngredient => {
+        //       return dataIngredient.id === ingredient.id;
+        //     });
+        //     //console.log("missing:", missing.name)
+        //     missingIngredientName = (missing || []).name;
+        //   })
+        //   return missingIngredientsNames;
+        // }
 
+// isSupplyFor(recipe) {
+  //   const passingIngredients = recipe.ingredients.filter(ingredient => {
+    //     let recipeAmount = ingredient.quantity.amount;
+    //     //console.log("PANTRY DATA:", this.pantryData)
+    //     let pantryItem = this.pantryData.find(item => {
+      //       //console.log("ING DATA:", recipe.ingredientsData);
+      //       return item.ingredient === (recipe.ingredientsData
+        //         .find(ing => ing.id === item.ingredient) || []).id;
+        //     });
+        //     return (pantryItem || []).amount > recipeAmount;
+        //   });
+        //   //console.log(passingIngredients.length)
+        //   if (passingIngredients.length === recipe.ingredients.length) {
+          //     return true;
+          //   } else {
+            //     return this.determineMissing(recipe, passingIngredients);
+            //   }
+            // }
 module.exports = Pantry;
