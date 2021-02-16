@@ -10,12 +10,11 @@ class Recipe {
     this.tags = recipe.tags;
     this.ingredientsData = ingredientsData.filter(ingredient => {
       const recipeIngredient = recipe.ingredients.find(recipeIngred => {
-        //console.log(ingredient.id);
+        // console.log('CURRENT ID:' , ingredient.id);
         return recipeIngred.id === ingredient.id
       });
-      return ingredient.id === (recipeIngredient || []).id;
+      return (recipeIngredient || []).id;
     });
-    //console.log("ING DATA", this.ingredientsData);
   }
 
   getIngredients() {
