@@ -12,7 +12,6 @@ class RecipeRepo {
     }, []);
   }
 
-
   matchIngredient(ingredientId) {
     return this.recipes.filter(recipe => {
       return recipe.ingredients.find(ingredient => {
