@@ -7,8 +7,6 @@ const currentRecipeInstructions = currentRecipeContainer
   .querySelector('.current-recipe-instructions');
 const currentRecipeTitle = currentRecipeContainer
   .querySelector('.current-recipe-title');
-const currentTitleContainer = currentRecipeContainer
-  .querySelector('.current-recipe-title-container')
 const currentRecipeImg = currentRecipeContainer
   .querySelector('.current-recipe-img')
 const recipeList = document.querySelector('.recipe-list');
@@ -121,7 +119,7 @@ function showPlannedRecipes() {
 }
 
 function randomizeCardColor(recipeCard) {
-  const colorArr = ['green-card', 'blue-card', 'orange-card', 'pink-card', 'cyan-card'];
+  const colorArr = ['pink-card', 'blue-card', 'orange-card', 'navy-card', 'yellow-card'];
   var color = colorArr[Math.floor(Math.random() * colorArr.length)];
   recipeCard.classList = `recipe ${color}`;
 }
@@ -232,6 +230,7 @@ function submitSearch(e) {
   } else {
     determineSearch(searchValue, recipeRepo.recipes)
   }
+  eraseTags();
 }  
 
 function clickRecipeCard(e) {
@@ -358,14 +357,10 @@ function createCardContents (cardLi, recipe) {
     } else {
       cardLi.querySelector('.favorite-label').classList.remove('fav-checked');
     }
-    if (currentRecipes.length >= recipeCards.length) {
-      // nextPageArrow.classList.remove('vis-hidden');
-    }
   }
 }
 
-function determineSearch(searchValue, searchArray) {
-  const matchedName = searchArray.find(recipe => recipe.name.toLowerCase().includes(searchValue.toLowerCase()));
+function checkSearchIngredient(searchArray, searchValue) {
   let ingredientFound = false;
   searchArray.forEach(favorite => {
     const currentIngredients = favorite.getIngredients();
@@ -376,13 +371,23 @@ function determineSearch(searchValue, searchArray) {
       ingredientFound = found.id;
     }
   });
-  if (searchArray === recipeRepo.user.favorites && ingredientFound) {
-    searchFavorites(ingredientFound, true)
+  if (ingredientFound) {
+    return ingredientFound;
+  } else {
+    return false;
+  }
+}
+
+function determineSearch(searchValue, searchArray) {
+  const matchedName = searchArray.find(recipe => recipe.name.toLowerCase().includes(searchValue.toLowerCase()));
+  const matchedIngredient = checkSearchIngredient(searchArray, searchValue);
+  if (searchArray === recipeRepo.user.favorites && matchedIngredient) {
+    searchFavorites(matchedIngredient, true)
   } else if (searchArray === recipeRepo.user.favorites && matchedName) {
     searchFavorites(searchValue)
-  } else if (matchedName && !ingredientFound) {
+  } else if (matchedName && !matchedIngredient) {
     generateRecipeCards(recipeRepo.matchName(searchValue), 0);
-  } else if (ingredientFound) {
-    generateRecipeCards(recipeRepo.matchIngredient(ingredientFound), 0);
+  } else if (matchedIngredient) {
+    generateRecipeCards(recipeRepo.matchIngredient(matchedIngredient), 0);
   }
 }
