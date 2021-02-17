@@ -32,10 +32,10 @@ Upon load, a random user will be chosen.
 
 ---
 #### Images of mobile and tablet versions 
-
-![mobile version](./assets/Screen Shot 2021-02-16 at 6.29.12 PM.png)
-
-
+Mobile View:
+![mobile version](https://github.com/percworld/whats-cooking/blob/main/assets/Screen%20Shot%202021-02-16%20at%206.50.50%20PM.png)
+---
+Tablet View:
 ![tablet view](https://github.com/percworld/whats-cooking/blob/main/assets/Screen%20Shot%202021-02-16%20at%206.29.12%20PM.png)
 ---
 #### Future Updates
