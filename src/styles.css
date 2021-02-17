@@ -4,7 +4,6 @@ html, body {
   font-family: 'Poiret One';
   background-image: url(../data/wooden-shelf-product-background.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
   width: 100%;
   margin: 0px;
 }
@@ -30,14 +29,13 @@ button:focus {
 main {
   height: 50%;
   display: flex;  
-  justify-content: space-between;
   align-items: flex-end;
   background-size: contain;
 }
 
 .sidebar {
   width: 100vh;
-  height: 30px;
+  height: 3vh;
   transform-origin: bottom left;
   position: absolute;
   left: 35px;
@@ -53,11 +51,10 @@ main {
 
 /* USER BUTTONS */
 .button-container {
+  align-self: flex-start;
   display: flex;
   align-items: flex-start;
   width: 40%;
-  align-self: flex-start;
-  border-radius: .5%;
   flex-flow: column;
   margin-left: 2%;
 }
@@ -65,32 +62,16 @@ main {
 .button-container > button {
   border: none;
   background-color: inherit;
-  padding: 1%;
   color: #000000;
   margin: 7%;
-  text-align: center;
   height: 1vh;
   font-size: 2.5vh
 }
 
 .pantry-container {
-  display: flex;
-  flex-flow: column;
   box-shadow: 0px 0px 2px 2px #000000;
   margin: 3%;
   overflow-y: scroll;
-}
-
-.pantry-ingredient {
-  color: #000000;
-  font-size: 2.5vh;
-}
-
-.pantry-title {
-  align-self: flex-start;
-  font-size: 2.5vh;
-  font-weight: bolder;
-  color: #000000;
 }
 
 /* SEARCH CONTAINER */
