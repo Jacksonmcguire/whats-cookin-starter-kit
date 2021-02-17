@@ -103,6 +103,7 @@ function randomizeCardColor(recipeCard) {
   var color = colorArr[Math.floor(Math.random() * colorArr.length)];
   recipeCard.classList = `recipe ${color}`;
 }
+
 function checkPantry() {
   pageViewArr[1] = false; pageViewArr[2] = true;
   tagContainer.classList.add('hidden');
