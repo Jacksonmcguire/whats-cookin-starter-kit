@@ -3,8 +3,8 @@
 
 ### User:
 #### Each user has a pantry in which they store their ingredients.  They have access to a number of recipes and may add them to either their favorites or a list of planned meals.  As a user you may cook a meal if you have the required ingredients.  This will remove the items from your pantry.  
-
-![desktop-view](../assets/Screen Shot 2021-02-16 at 6.29.12 PM.png)
+![](https://github.com/percworld/whats-cooking/blob/main/assets/Screen%20Shot%202021-02-16%20at%206.29.12%20PM.png)
+![desktop-view](./assets/Screen Shot 2021-02-16 at 6.29.12 PM.png)
 
 #### 1. Take a look around in the cookbook
 ####   * You may filter the list of cards that appear to your liking by clicking the tags on the left panel that describe your preferred recipes.  When enabled, the tag will appear green and yopu will see only recipes that include this descriptor.
