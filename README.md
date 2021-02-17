@@ -23,6 +23,15 @@
 #### 6.  To cook a meal, when you have it chosen as a feature and are ready to follow the instructions, click the "Cook" button at the top left of the feature window that appears if your pantry is supplied for this meal.  This will ensure that your pantry is updated to the proper amounts of ingredients.
 
 ---
+### Dependencies
+The user will need access to the internet, and to follow the this link
+
+### Installing
+[Our program is located on GitHub under deployed link](https://percworld.github.io/whats-cooking/)
+This program does not need to be motified or adjusted beforehand by the user.
+Upon load, a random user will be chosen.
+
+---
 #### Images of mobile and tablet versions 
 
 ![mobile version](./assets/Screen Shot 2021-02-16 at 6.29.12 PM.png)
@@ -36,6 +45,8 @@
       Another future feature of this project is a refactoring of the media queries in css styles.  Although the functionality is manageable, there are some adjustments to the appearance of images and the ingredients list for the feature recipe that could make it easier to read and understand.  This will require some html adjustments and building back up after the elements are correctly positioned for maintanence.
       
 ---
+## Authors
+* Chuck Morris [@percworld](https://github.com/percworld)
+* Jackson McGuire [@Jacksonmcguire](https://github.com/Jacksonmcguire)
 
-### [Jackson McGuire](https://github.com/Jacksonmcguire) & [Chuck Morris](https://github.com/percworld)
 ### [Turing School of Software and Design](https://turing.io/programs/?gclid=Cj0KCQiA962BBhCzARIsAIpWEL2-Y9JxknMSsp6VvxDo7JhiVuRIZ10RTcD90NvJXyZuqkUB3R8BY5AaAkXlEALw_wcB)
