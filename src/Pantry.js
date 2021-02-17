@@ -28,21 +28,30 @@ class Pantry {
   }
 
   determineMissing(ingredientsData, passingIngredients) {
-    const missingIngredients = ingredientsData.filter(ingredient => {
+    const missingIngredients = this
+      .findMissingIngredients(ingredientsData, passingIngredients);
+    const missingIngredientsNames = this
+      .findMissingIngredientsNames(ingredientsData, missingIngredients);
+    return missingIngredientsNames.map(i => {
+      return missingIngredientsNames[missingIngredientsNames.indexOf(i)].name
+    });
+  }
+
+  findMissingIngredients(ingredientsData, passingIngredients) {
+    return ingredientsData.filter(ingredient => {
       const { id } = ingredient;
       const foundId = passingIngredients.find(passing => passing.id === id)
       return !foundId;
     });
-    const missingIngredientsNames = missingIngredients.map(ingredient => {
+  }
+
+  findMissingIngredientsNames(ingredientsData, missingIngredients) {
+    return missingIngredients.map(ingredient => {
       const missingIngredient = ingredientsData.find(dataIngredient => {
         return dataIngredient.id === ingredient.id;
       });
       return missingIngredient;
     });
-    return missingIngredientsNames.map(i => {
-      return missingIngredientsNames[missingIngredientsNames.indexOf(i)].name
-    });
-
   }
 
   cookFeature({ ingredients }) {
