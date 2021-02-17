@@ -12,7 +12,7 @@ class Recipe {
       const recipeIngredient = recipe.ingredients.find(recipeIngred => {
         return recipeIngred.id === ingredient.id
       });
-      return (recipeIngredient || []).id;
+      return ingredient.id === (recipeIngredient || []).id;
     });
   }
 
