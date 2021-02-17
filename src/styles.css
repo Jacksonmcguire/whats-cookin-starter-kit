@@ -1,12 +1,16 @@
 
 html, body {
   height: 100%;
-  font-family: Garamond;
+  font-family: 'Poiret One';
   background-image: url(../data/wooden-shelf-product-background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
   margin: 0px;
+}
+
+* {
+  font-family: inherit;
 }
 
 button {
@@ -36,11 +40,12 @@ main {
   height: 30px;
   transform-origin: bottom left;
   position: absolute;
-  left: 30px;
+  left: 35px;
   bottom: 0;
   transform: rotate(-90deg);
   text-align: center;
   color: #000000;
+  padding-bottom: .5%;
   border-bottom: solid;
   font-size: 2em;
   font-weight: bold;
@@ -52,10 +57,6 @@ main {
   align-items: flex-start;
   width: 40%;
   align-self: flex-start;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: bottom;
   border-radius: .5%;
   flex-flow: column;
   margin-left: 2%;
@@ -68,7 +69,7 @@ main {
   color: #000000;
   margin: 7%;
   text-align: center;
-  height: 10%;
+  height: 1vh;
   font-size: 2.5vh
 }
 
@@ -121,7 +122,6 @@ main {
   background-size: cover;
   align-items: flex-start; 
   border-radius: 10%;
-  border: 1px solid inherit;
   margin-right: 2%;
   margin: 0 2% 0 1.5%;
 }
@@ -129,8 +129,6 @@ main {
 .current-recipe {
   display: flex;
   box-shadow: 0px 0px 2px 2px #000000;
-  /* background-color: #F0F0E1; */
-  /* background: transparent; */
   width: 100%;
   height: 100%;
   color: #000000;
@@ -143,21 +141,16 @@ main {
   color: #000000;
   border-radius: 5%;
   margin: 1% 5% 3% 0;
-  height: 100%;
 }
 
 .current-recipe-img {
-  height: 35vh;
-  width: 35vh;
-}
-
-.current-recipe-title {
-  height: 100%;
+  width: 100%;
 }
 
 .user-message {
+  height: 100%;
   align-self: flex-end;
-  margin-bottom: 5%;
+  margin-bottom: 1%;
 }
 
 .current-recipe-instructions {
@@ -184,8 +177,9 @@ main {
 
 
 .cook-btn {
-  color: #5db8c4d8;
-  border: none;
+  color: #000000;
+  background-color: transparent;
+  align-self: center;
   border-radius: 20px;
   margin: 50% 0 3% 3%;
 }
@@ -193,7 +187,7 @@ main {
 
 /* INTERACTIVE-AREA */
 
-.interactive-area {
+.interactive-container {
   display: flex;
   height: 45%;
 }
@@ -201,9 +195,7 @@ main {
 .my-list-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
   width: 10%;
-  height: 10%;
   margin: 1%;
   padding: 1%;
 }
@@ -222,7 +214,6 @@ main {
   justify-content: space-around;
   flex-flow: column wrap;
   height: 100%;
-  width: 100%;
   border-radius: 20px;
   margin: 0px 5% 10% 10%;
 }
@@ -239,16 +230,15 @@ input[type="radio"] {
   margin: 3%;
   color: #000000;
   font-size: 2.5vh;
-  /* height: 3vh; */
 }
 
 .tag-label-checked, 
 .tag-container > label:hover {
-  background-color: #ccfab1;  
+  background-color: #92a8d1;  
   font-size: 2.51vh;
 }
 
-/* Recipe */
+/* RECIPE CARDS */
 
 .recipe-list {
   display: flex;
@@ -287,7 +277,6 @@ input[type="radio"] {
   opacity: 0.85;
   align-self: flex-end;
   transition: transform 500ms;
-
 }
 
 /* RECIPE WHEN HOVERED */
@@ -299,11 +288,6 @@ input[type="radio"] {
   animation-duration: .5s;
 }
 
-.recipe-card:hover ~ .recipe {
-  transform: translateX(25%);
-}
-
-
 .recipe-card:hover .recipe-img {
   height: 20vh;
   width: 20vh;
@@ -314,7 +298,8 @@ input[type="radio"] {
 /* RECIPE INFO */
 
 .recipe-title {
-  font-size: 2.5vh;
+  text-align: right;
+  font-size: 2.2vh;
   margin: 15% 2% 0px 5%;
   color: inherit;
   width: 75%;
@@ -325,10 +310,9 @@ input[type="radio"] {
   color: inherit;
 }
 
-/* RECIPE BUTTONS */
+/* FAVORITE BUTTONS */
 .favorite-label {
-  align-self: flex-end;
-  margin-bottom: -40%;
+  align-self: flex-start;
   height: 30px;
   width: 30px;
   background-image: url("https://image.flaticon.com/icons/png/512/109/109697.png");
@@ -381,29 +365,149 @@ input[type="radio"] {
 /* RECIPE CARD COLORS */
 
 .cyan-card {
-  background-color: #B5DDD1;
-  box-shadow: 0px 0px 2px 2px #B5DDD1;
+  background-color: #92a8d1;
+  box-shadow: 0px 0px 2px 2px #92a8d1;
 }
 
 .green-card {
-  background-color: #D7E7A9;
+  background-color: #f2e394;
   box-shadow: 0px 0px 2px 2px #D7E7A9;
 }
 
 .blue-card {
-  background-color: #D3C0F9;
-  box-shadow: 0px 0px 2px 2px #D3C0F9;
+  background-color: #034f84;
+  box-shadow: 0px 0px 2px 2px #034f84;
 }
 
 .orange-card {
-  background-color: #F99A9C;
-  box-shadow: 0px 0px 2px 2px #F99A9C;
+  background-color: #d96459;
+  box-shadow: 0px 0px 2px 2px #f7786b;
 }
 
 .pink-card {
-  background-color: #FDBCCF;
-  box-shadow: 0px 0px 2px 2px #FDBCCF;
+  background-color: #f7786b;
+  box-shadow: 0px 0px 2px 2px #f7cac9;
 }
+
+/* TABLET */
+
+@media screen and (max-width: 800px) {
+  .interactive-container {
+    width: 60%;
+  }
+  
+  .my-list-container {
+    margin: 5%;
+  }
+  
+  .current-recipe-title-container {
+    width: 30%;
+  }
+  
+  .current-recipe-title {
+    font-size: 1em;
+  }
+  
+  .recipe-list {
+    margin-left: 5%;
+  }
+  
+  .recipe {
+    width: 12vh;
+  }
+  
+  .recipe-img {
+    width: 50%;
+  }
+  
+  .tag-container {
+    flex-flow: column wrap;
+    margin-left: -1%;
+  }
+  
+  .sidebar {
+    display: none;
+  }
+  
+  .button-container {
+    margin-top: 10%;
+    margin-left: 5%;
+    width: 20%;
+  }
+  
+  .button-container > button {
+    margin: 15%;
+  }
+  
+  .tag-container > label {
+    font-size: 1em;
+  }
+  
+  .my-list-btn {
+    padding: .5vh;
+    overflow-y: hidden;
+  }
+  
+  .pantry-container {
+    overflow: visible; 
+    width: 100%;
+  }
+  .my-ingredients {
+    overflow-y: scroll;
+  }
+  
+}
+
+@media screen and (max-width: 500px) {
+  html, body {
+    background: transparent;
+  }
+
+  main {
+    height: 100%;
+  }
+
+  .interactive-container {
+    width: 100%;
+    height: 30%;
+  }
+  
+  .current-recipe-container {
+    width: 90%;
+    align-self: flex-end;
+  }
+
+  .current-recipe-title-container {
+    width: 40%;
+  }
+  
+  .recipe {
+    width: 8.5vh;
+    /* margin-right: 5%; */
+  }
+  
+  .recipe-img {
+    width: 25%;
+  }
+  
+  .tag-container {
+    flex-flow: column;
+  }
+  
+  .button-container {
+    margin-right: 2%;
+  }
+  
+  .arrow {
+    align-self: flex-end
+  }
+
+  .right {
+    margin-right: -50%;
+  }
+
+}
+
 /* HIDDEN */
 .hidden {
   display: none;
