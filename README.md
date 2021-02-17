@@ -3,8 +3,7 @@
 
 ### User:
 #### Each user has a pantry in which they store their ingredients.  They have access to a number of recipes and may add them to either their favorites or a list of planned meals.  As a user you may cook a meal if you have the required ingredients.  This will remove the items from your pantry.  
-![](https://github.com/percworld/whats-cooking/blob/main/assets/Screen%20Shot%202021-02-16%20at%206.29.12%20PM.png)
-![desktop-view](./assets/Screen Shot 2021-02-16 at 6.29.12 PM.png)
+![desktop view](https://github.com/percworld/whats-cooking/blob/main/assets/Screen%20Shot%202021-02-16%20at%207.01.59%20PM.png)
 
 #### 1. Take a look around in the cookbook
 ####   * You may filter the list of cards that appear to your liking by clicking the tags on the left panel that describe your preferred recipes.  When enabled, the tag will appear green and yopu will see only recipes that include this descriptor.
@@ -37,7 +36,7 @@ Upon load, a random user will be chosen.
 ![mobile version](./assets/Screen Shot 2021-02-16 at 6.29.12 PM.png)
 
 
-![tablet version](./assets/Screen Shot 2021-02-16 at 7.01.59 PM.png)
+![tablet view](https://github.com/percworld/whats-cooking/blob/main/assets/Screen%20Shot%202021-02-16%20at%206.29.12%20PM.png)
 ---
 #### Future Updates
       Future Updates to this project include a refactoring of the ingredient class to include in it's constructor a recipe name.  This would help developer empathy and latency both by allowing methods to simplify their process of searching for id's and matching the id in the ingredient data set (which includes the ingredient's name) to apply a name to the recipe. Currently there is some prototype method nesting that can be resolved by this refactor.
