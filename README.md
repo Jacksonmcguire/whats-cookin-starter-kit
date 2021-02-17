@@ -23,21 +23,26 @@
 
 ---
 ### Dependencies
-The user will need access to the internet, and to follow the this link
+The user will need access to the internet, and to follow this link: [Server](http://127.0.0.1:3000/src/)
 
 ### Installing
 [Our program is located on GitHub under deployed link](https://percworld.github.io/whats-cooking/)
 This program does not need to be motified or adjusted beforehand by the user.
 Upon load, a random user will be chosen.
 
+
+---
 ---
 #### Images of mobile and tablet versions 
-Mobile View:
+##### Mobile View:
+
 ![mobile version](https://github.com/percworld/whats-cooking/blob/main/assets/Screen%20Shot%202021-02-16%20at%206.50.50%20PM.png)
+
 ---
-Tablet View:
+
+##### Tablet View:
+
 ![tablet view](https://github.com/percworld/whats-cooking/blob/main/assets/Screen%20Shot%202021-02-16%20at%206.29.12%20PM.png)
----
 #### Future Updates
       Future Updates to this project include a refactoring of the ingredient class to include in it's constructor a recipe name.  This would help developer empathy and latency both by allowing methods to simplify their process of searching for id's and matching the id in the ingredient data set (which includes the ingredient's name) to apply a name to the recipe. Currently there is some prototype method nesting that can be resolved by this refactor.
       
