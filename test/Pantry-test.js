@@ -46,6 +46,154 @@ describe ('Pantry', () => {
       expect(pantry.isSupplyFor(recipeRepo.recipes[2])).to.deep.equal(['barbarol']);
     });
 
+    it ('should know if an item is located in the pantry', () => {
+      expect(pantry.isPantryItem(pantry.pantryData[0].amount, recipeNumberOne.ingredientsData))
+        .to.deep.equal(true);
+      expect(pantry.isPantryItem(pantry.pantryData[1].amount, recipeRepo.recipes[1].ingredientsData))
+        .to.deep.equal(true);
+      expect(pantry.isPantryItem(pantry.pantryData[2].amount, recipeRepo.recipes[2].ingredientsData))
+        .to.deep.equal(false);
+    });
+
+    it ('should determine if an item is not located in the pantry what exactly is missing', () => {
+      expect(pantry.determineMissing(recipeNumberOne.ingredientsData,
+        [
+          {
+            id: 23,
+            quantity: { amount: 42, unit: 'octoban' },
+            amount: 42,
+            unit: 'octoban'
+          },
+          {
+            id: 27,
+            quantity: { amount: 28, unit: 'oz' },
+            amount: 28,
+            unit: 'oz'
+          }
+        ]))
+        .to.have.lengthOf(0);
+      expect(pantry.determineMissing(recipeRepo.recipes[1].ingredientsData,
+        [
+          {
+            id: 31,
+            quantity: { amount: 28, unit: 'oz' },
+            amount: 28,
+            unit: 'oz'
+          }
+        ]))
+        .to.deep.equal(['bootstraps']);
+      expect(pantry.determineMissing(recipeRepo.recipes[2].ingredientsData,
+        [
+          {
+            'id': 27,
+            'quantity': {
+              'amount': 85,
+              'unit': 'octoban'
+            }
+          },
+          {
+            'id': 31,
+            'quantity': {
+            'amount': 28,
+            'unit': 'oz'
+            }
+          }
+        ])).to.deep.equal([]);
+    });
+
+    it('should find missingingredients that are required for the recipe', () => {
+      expect(pantry.findMissingIngredients(recipeNumberOne.ingredientsData,
+        [
+          {
+            id: 23,
+            quantity: { amount: 42, unit: 'octoban' },
+            amount: 42,
+            unit: 'octoban'
+          },
+          {
+            id: 27,
+            quantity: { amount: 28, unit: 'oz' },
+            amount: 28,
+            unit: 'oz'
+          }
+        ]))
+        .to.have.lengthOf(0);
+      expect(pantry.determineMissing(recipeRepo.recipes[1].ingredientsData,
+        [
+          {
+            id: 31,
+            quantity: { amount: 28, unit: 'oz' },
+            amount: 28,
+            unit: 'oz'
+          }
+        ]))
+        .to.deep.equal(['bootstraps']);
+      expect(pantry.determineMissing(recipeRepo.recipes[2].ingredientsData,
+        [
+          {
+            'id': 27,
+            'quantity': {
+              'amount': 85,
+              'unit': 'octoban'
+            }
+          },
+          {
+            'id': 23,
+            'quantity': {
+            'amount': 28,
+            'unit': 'oz'
+            }
+          }
+        ])).to.deep.equal(['cherries']);
+    });
+
+    it('should find know only the name of the missing ingredients that are required for the recipe', () => {
+      expect(pantry.findMissingIngredients(recipeNumberOne.ingredientsData,
+        [
+          {
+            id: 23,
+            quantity: { amount: 42, unit: 'octoban' },
+            amount: 42,
+            unit: 'octoban'
+          },
+          {
+            id: 27,
+            quantity: { amount: 28, unit: 'oz' },
+            amount: 28,
+            unit: 'oz'
+          }
+        ]))
+        .to.have.lengthOf(0);
+      expect(pantry.determineMissing(recipeRepo.recipes[1].ingredientsData,
+        [
+          {
+            id: 31,
+            quantity: { amount: 28, unit: 'oz' },
+            amount: 28,
+            unit: 'oz'
+          }
+        ]))
+        .to.deep.equal(['bootstraps']);
+      expect(pantry.determineMissing(recipeRepo.recipes[2].ingredientsData,
+        [
+          {
+            'id': 27,
+            'quantity': {
+              'amount': 85,
+              'unit': 'octoban'
+            }
+          },
+          {
+            'id': 23,
+            'quantity': {
+            'amount': 28,
+            'unit': 'oz'
+            }
+          }
+        ])).to.deep.equal(['cherries']);
+    });
+
+
     it('should remove ingredients from pantry when a feature is cooked', () => {
       pantry.cookFeature(recipeNumberOne);
       expect(pantry.pantryData).to.deep.equal([
