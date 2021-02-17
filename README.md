@@ -26,7 +26,9 @@
 #### Images of mobile and tablet versions 
 
 ![mobile version](assets/Screen Shot 2021-02-16 at 6.29.12 PM.png)
-![tablet version](/Users/charlesmorris/turing/2module/whats-cooking/assets/Screen Shot 2021-02-16 at 7.01.59 PM.png)
+
+
+![tablet version](./assets/Screen Shot 2021-02-16 at 7.01.59 PM.png)
 ---
 #### Future Updates
       Future Updates to this project include a refactoring of the ingredient class to include in it's constructor a recipe name.  This would help developer empathy and latency both by allowing methods to simplify their process of searching for id's and matching the id in the ingredient data set (which includes the ingredient's name) to apply a name to the recipe. Currently there is some prototype method nesting that can be resolved by this refactor.
