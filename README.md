@@ -1,7 +1,7 @@
 ## What's Cooking?
 
+### A recipe navigating host for your personal pantry.
 
-### User:
 #### As a user, you have access to a number of recipes and may add them to either your favorites or a list of planned meals. In the user main control panel to the top left of your screen you will see your favorites, planned meals and a home button to escape these lists. Each user has a pantry in which they store their ingredients. You will see this appear when you bring any meal into the Feature area. As a user you may cook a meal if you have the required ingredients.  This will remove the items from your pantry.  
 ![desktop view](https://github.com/percworld/whats-cooking/blob/main/assets/Screen%20Shot%202021-02-16%20at%207.01.59%20PM.png)
 
